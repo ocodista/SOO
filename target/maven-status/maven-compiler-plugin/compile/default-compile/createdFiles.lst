@@ -1,0 +1,8 @@
+com\aula_soo\atividade6\models\Locacao.class
+com\aula_soo\atividade6\dao\FaturaDao.class
+com\aula_soo\atividade6\models\Fatura.class
+com\aula_soo\atividade6\utils\FabricaConexao.class
+com\aula_soo\atividade6\utils\IMySql.class
+com\aula_soo\atividade6\App.class
+com\aula_soo\atividade6\dao\impl\FaturaDaoImpl.class
+com\aula_soo\atividade6\models\ItemFatura.class
