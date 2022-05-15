@@ -8,3 +8,9 @@ docker-compose up -d
 ```
 
 na pasta root
+
+## Testes
+
+```
+mvn clean test
+```
