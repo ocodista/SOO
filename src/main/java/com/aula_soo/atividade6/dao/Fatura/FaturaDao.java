@@ -9,5 +9,5 @@ public interface FaturaDao {
             "valorTotal, tipoPagamento, status, Locacao_idLocacao)" +
             " VALUES(?, ?, ?, ?)";
 
-    void cadastrarFatura(Fatura fatura) throws SQLException;
+    boolean cadastrarFatura(Fatura fatura) throws SQLException;
 }

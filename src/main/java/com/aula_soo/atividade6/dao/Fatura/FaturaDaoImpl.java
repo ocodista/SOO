@@ -10,7 +10,7 @@ import com.aula_soo.atividade6.utils.FabricaConexao;
 public class FaturaDaoImpl implements FaturaDao {
 
     @Override
-    public void cadastrarFatura(Fatura fatura) throws SQLException {
+    public boolean cadastrarFatura(Fatura fatura) throws SQLException {
         Connection con = FabricaConexao.getConexao();
 
         if (con != null) {
@@ -29,8 +29,11 @@ public class FaturaDaoImpl implements FaturaDao {
                 con.commit();
 
                 con.close();
+
+                return true;
             } catch (SQLException e) {
                 System.err.println("Erro[Cadastro fatura]: " + e);
+                return false;
             }
         } else {
             throw new SQLException("Erro[Cadastro fatura]: sem conexão");
