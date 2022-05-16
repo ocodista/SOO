@@ -2,42 +2,24 @@ package com.aula_soo.atividade6;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.sql.SQLException;
-
-import com.aula_soo.atividade6.dao.DaoFactory;
-import com.aula_soo.atividade6.dao.Fatura.FaturaDaoImpl;
-import com.aula_soo.atividade6.models.Fatura;
 import com.aula_soo.atividade6.models.FaturaDto;
 import com.aula_soo.atividade6.models.Locacao;
+import com.aula_soo.atividade6.service.Fatura.FaturaServiceImpl;
 import com.aula_soo.atividade6.service.Fatura.ServiceFactory;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 public class FaturaTest {
-
-    private DaoFactory daoFactoryMock;
-    
-    private FaturaDaoImpl faturaDaoImplMock;
-
-    @BeforeEach void setUp() throws SQLException{
-        daoFactoryMock = Mockito.mock(DaoFactory.class);
-        faturaDaoImplMock = Mockito.mock(FaturaDaoImpl.class);
-        Mockito.when(faturaDaoImplMock.cadastrarFatura(Mockito.any(Fatura.class))).thenReturn(true);
-        Mockito.when(daoFactoryMock.getFatruaDao()).thenReturn(faturaDaoImplMock);
-    }
 
     @Test
     void cadastrarFaturaTest() throws Exception {
-        ServiceFactory serviceFactory = new ServiceFactory();
-
-        boolean isSuccessServiceExecute = serviceFactory.getFaturaService().cadastrarFatura(mockFaturaDto());
-
+        ServiceFactory serviceFactoryMock = Mockito.mock(ServiceFactory.class);
+        FaturaServiceImpl faturaServiceImplMock = Mockito.mock(FaturaServiceImpl.class);
+        Mockito.when(serviceFactoryMock.getFaturaService()).thenReturn(faturaServiceImplMock);
+        Mockito.when(serviceFactoryMock.getFaturaService().cadastrarFatura(Mockito.any(FaturaDto.class))).thenReturn(true);
+    
+        boolean isSuccessServiceExecute = serviceFactoryMock.getFaturaService().cadastrarFatura(mockFaturaDto());
         assertTrue(isSuccessServiceExecute);
     }
 
