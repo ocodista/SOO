@@ -1,15 +1,15 @@
 # SOO
 
-## Banco de dados
-Para iniciar o banco de dados, rode  
+## Docker
+
+Para iniciar as aplicações, rode
 
 ```
 docker-compose up -d
 ```
 
-na pasta root
-
 ## Testes
+Para rodar os testes, rode
 
 ```
 mvn clean test
