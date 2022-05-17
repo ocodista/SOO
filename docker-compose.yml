@@ -1,23 +1,40 @@
 version: '3.5'
 
 services:
-  db:
+  rabbit: 
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: fila-soo
+      RABBITMQ_DEFAULT_PASS: Grupo05@SOO
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: on-failure
+    volumes:
+      - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
+
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ./volumes/mongo:/data/db
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo-soo
+      - MONGO_INITDB_ROOT_PASSWORD=Grupo05*SOO
+
+  mysql:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'db'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'soo123'
-      # Password for root access
+      MYSQL_DATABASE: 'fazenda-vertical'
+      MYSQL_USER: 'mysql-soo'
+      MYSQL_PASSWORD: 'Grupo05@SOO'
       MYSQL_ROOT_PASSWORD: '1@#!R00T0(*&'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     expose:
-      # Opens port 3306 on the container
       - '3306'
-      # Where our data will be persisted
     volumes:
-      - ./database:/var/lib/mysql
+      - ./volumes/mysql:/var/lib/mysql
