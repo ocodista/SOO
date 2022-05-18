@@ -6,6 +6,7 @@ D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\at
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\service\Fatura\ServiceFactory.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\App.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\IMySql.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\migrations\FaturaMigration.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\dao\DaoFactory.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\models\Fatura.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\FabricaConexao.java

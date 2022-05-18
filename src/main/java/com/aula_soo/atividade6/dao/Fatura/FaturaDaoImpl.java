@@ -2,9 +2,11 @@ package com.aula_soo.atividade6.dao.Fatura;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.aula_soo.atividade6.models.Fatura;
+import com.aula_soo.atividade6.models.Locacao;
 import com.aula_soo.atividade6.utils.FabricaConexao;
 
 public class FaturaDaoImpl implements FaturaDao {
@@ -37,6 +39,44 @@ public class FaturaDaoImpl implements FaturaDao {
             }
         } else {
             throw new SQLException("Erro[Cadastro fatura]: sem conexão");
+        }
+    }
+
+    @Override
+    public Fatura getAllFaturas() throws SQLException {
+        Connection con = FabricaConexao.getConexao();
+
+        if (con != null) {
+            try {
+                con.setAutoCommit(false);
+
+                PreparedStatement pstm = con.prepareStatement(SELECT_FATURAS,
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+
+                Fatura fatura = new Fatura();
+                Locacao locacao = new Locacao();
+                ResultSet result = pstm.executeQuery();
+
+                while (result.next()) {
+                    fatura.setIdFatura(result.getInt("idFatura"));
+                    fatura.setStatus(result.getBoolean("status"));
+                    fatura.setTipoPagamento(result.getString("tipoPagamento"));
+                    fatura.setValorTotal(result.getDouble("valorTotal"));
+                    locacao.setIdLocacao(result.getInt("idLocacao"));
+                    fatura.setLocacao(locacao);
+                }
+
+                con.commit();
+
+                con.close();
+
+                return fatura;
+            } catch (SQLException e) {
+                System.err.println("Erro[Recuperar faturas]: " + e);
+                return null;
+            }
+        } else {
+            throw new SQLException("Erro[Recuperar faturas]: sem conexão");
         }
     }
 }

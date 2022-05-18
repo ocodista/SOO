@@ -25,5 +25,10 @@ public class FaturaServiceImpl implements FaturaService {
       return false;
     }
   }
+
+  @Override
+  public Fatura getAllFatuas() throws SQLException {
+    return daoFactory.getFatruaDao().getAllFaturas();
+  }
   
 }
