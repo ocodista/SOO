@@ -31,7 +31,7 @@ public class SwaggerConfigurattion {
         return new Docket(DocumentationType.SWAGGER_2)
             .groupName("ativ7")
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.example.api.resources"))
+            .apis(RequestHandlerSelectors.basePackage("com.ativ7.api.resources"))
             .build()
             .ignoredParameterTypes(LocalDate.class, CompletableFuture.class)
             .directModelSubstitute(LocalDate.class, String.class)
@@ -54,7 +54,7 @@ public class SwaggerConfigurattion {
 
     private Tag[] resources() {
         return new Tag[] {
-            new Tag("Hello World", "Este endpoint retorna um Hello World."),
+            new Tag("Locação", "Este endpoint oferece serviços para locação de carros."),
         };
     }
 }

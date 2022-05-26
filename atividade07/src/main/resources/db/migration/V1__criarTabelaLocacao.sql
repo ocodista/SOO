@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS locacao (
+	idLocacao BIGINT(20) NOT NULL AUTO_INCREMENT,
+	status BOOLEAN NOT NULL,
+	idPessoa BIGINT(20) NOT NULL,
+    CONSTRAINT pk_locacao PRIMARY KEY (idLocacao)
+);
