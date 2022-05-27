@@ -1,13 +1,13 @@
-package com.ativ7.api.services.locacao.v1.impl;
+package com.ativ7.api.mongo.services.impl;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.ativ7.api.dtos.InputAtualizarLocacaoDTO;
 import com.ativ7.api.dtos.InputLocacaoDTO;
-import com.ativ7.api.entities.Locacao;
-import com.ativ7.api.repositories.jpa.LocacaoJpaRepository;
-import com.ativ7.api.services.locacao.v1.LocacaoService;
+import com.ativ7.api.mongo.documents.LocacaoDocument;
+import com.ativ7.api.mongo.repositories.LocacaoMongoRepository;
+import com.ativ7.api.mongo.services.LocacaoMongoService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,18 +17,16 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LocacaoServiceImpl implements LocacaoService{
+public class LocacaoMongoServiceImpl implements LocacaoMongoService{
 
-    private final LocacaoJpaRepository locacaoRepository;
+    private final LocacaoMongoRepository locacaoRepository;
     private final ModelMapper modelMapper;
 
     @Override
     public void cadastrarLocacao(InputLocacaoDTO inputLocacaoDTO) throws Exception {
         Assert.notNull(inputLocacaoDTO.getStatus(), "O atributo 'status' é obrigatório");
         Assert.notNull(inputLocacaoDTO.getIdPessoa(), "O atributo 'idPessoa' é obrigatório");
-
-        Locacao locacao = modelMapper.map(inputLocacaoDTO, Locacao.class);
-
+        LocacaoDocument locacao = modelMapper.map(inputLocacaoDTO, LocacaoDocument.class);
         try {
             locacaoRepository.save(locacao);
         } catch(Exception exception) {
@@ -37,7 +35,7 @@ public class LocacaoServiceImpl implements LocacaoService{
     }
 
     @Override
-    public List<Locacao> buscarLocacoes() throws Exception {
+    public List<LocacaoDocument> buscarLocacoes() throws Exception {
         try {
             return locacaoRepository.findAll();
         } catch(Exception exception) {
@@ -46,29 +44,37 @@ public class LocacaoServiceImpl implements LocacaoService{
     }
 
     @Override
-    public Locacao atualizarLocacao(Long idLocacao, InputAtualizarLocacaoDTO inputAtualizarLocacaoDTO) throws Exception {
+    public LocacaoDocument atualizarLocacao(Long idLocacao, InputAtualizarLocacaoDTO inputAtualizarLocacaoDTO) throws Exception {
         try {
             Assert.notNull(idLocacao, "O identificador da locação é obrigatório");
-
-            Optional<Locacao> locacaoEncontrada = locacaoRepository.findById(idLocacao);
-
-            Assert.isTrue(!locacaoEncontrada.isEmpty(), "Não foi possível encontrar uma locação com o identificador: " + idLocacao);
+            LocacaoDocument locacao = buscarLocacaoPorId(idLocacao);
             Assert.notNull(inputAtualizarLocacaoDTO, "É necessário passar alguma informação para atualizar a locação");
-
-            Locacao locacao = locacaoEncontrada.get();
-
             if (inputAtualizarLocacaoDTO.getIdPessoa() != null) {
                 locacao.setIdPessoa(inputAtualizarLocacaoDTO.getIdPessoa().get());
             }
-
             if(inputAtualizarLocacaoDTO.getStatus() != null) {
                 locacao.setStatus(inputAtualizarLocacaoDTO.getStatus().get());
             }
-
             return locacaoRepository.save(locacao);
         } catch (Exception exception) {
             throw new Exception("Erro ao atualizar locação com o identificador: " + idLocacao, exception);
         }
+    }
+
+    @Override
+    public void deletarLocacao(Long idLocacao) throws Exception {
+        Assert.notNull(idLocacao, "O id da locação é obrigatório.");
+        try {
+            locacaoRepository.deleteById(idLocacao);
+        } catch(Exception exception) {
+            throw new Exception("Não foi possível deletar a locação com o identifcador: " + idLocacao, exception);
+        }
+    }
+
+    private LocacaoDocument buscarLocacaoPorId(Long idLocacao) {
+        Optional<LocacaoDocument> locacaoEncontrada = locacaoRepository.findById(idLocacao);
+        Assert.notNull(locacaoEncontrada, "Não foi possível encontrar uma locação com o identificador: " + idLocacao);
+        return locacaoEncontrada.get();
     }
 
 }

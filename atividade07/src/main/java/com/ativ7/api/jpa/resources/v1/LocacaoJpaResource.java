@@ -1,4 +1,4 @@
-package com.ativ7.api.resources.v1;
+package com.ativ7.api.jpa.resources.v1;
 
 import java.util.List;
 
@@ -6,11 +6,12 @@ import javax.validation.Valid;
 
 import com.ativ7.api.dtos.InputAtualizarLocacaoDTO;
 import com.ativ7.api.dtos.InputLocacaoDTO;
-import com.ativ7.api.entities.Locacao;
-import com.ativ7.api.services.locacao.v1.LocacaoService;
+import com.ativ7.api.jpa.entities.LocacaoEntity;
+import com.ativ7.api.jpa.services.locacao.v1.LocacaoJpaService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +25,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 
-@Api(tags = { "Locação" })
+@Api(tags = { "Locação - JPA" })
 @RestController
-@RequestMapping("locacao")
+@RequestMapping("locacao/jpa")
 @RequiredArgsConstructor
-public class LocacaoResource {
+public class LocacaoJpaResource {
 
-    private final LocacaoService locacaoService;
+    private final LocacaoJpaService locacaoService;
 
     @ApiOperation(value = "Este serviço cadastra novas locações")
     @PostMapping("/")
@@ -43,19 +44,28 @@ public class LocacaoResource {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Locacao>> buscarLocacoes() throws Exception {
-        List<Locacao> listLocacao = locacaoService.buscarLocacoes();
+    public ResponseEntity<List<LocacaoEntity>> buscarLocacoes() throws Exception {
+        List<LocacaoEntity> listLocacao = locacaoService.buscarLocacoes();
         return ResponseEntity.status(HttpStatus.OK).body(listLocacao);
     }
 
     @PutMapping("/{idLocacao}")
-    public ResponseEntity<Locacao> atualizarLocacao(
+    public ResponseEntity<LocacaoEntity> atualizarLocacao(
         @ApiParam(value = "Id da locação a ser atualizada", required = true)
-        @PathVariable("idLocacao") Long idLocacao,
+        @PathVariable("idLocacao") String idLocacao,
         @ApiParam(value = "Dados da locação que podem ser atualizados")
         @RequestBody InputAtualizarLocacaoDTO inputAtualizarLocacaoDTO
     ) throws Exception {
-        Locacao locacaoAtualizada = locacaoService.atualizarLocacao(idLocacao, inputAtualizarLocacaoDTO);
+        LocacaoEntity locacaoAtualizada = locacaoService.atualizarLocacao(Long.parseLong(idLocacao), inputAtualizarLocacaoDTO);
         return ResponseEntity.status(HttpStatus.OK).body(locacaoAtualizada);
+    }
+
+    @DeleteMapping("/{idLocacao}")
+    public ResponseEntity<Void> deletarLocacao(
+        @ApiParam(value = "Id da locação a ser atualizada", required = true)
+        @PathVariable("idLocacao") String idLocacao
+    ) throws Exception {
+        locacaoService.deletarLocacao(Long.parseLong(idLocacao));
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -1,4 +1,4 @@
-package com.ativ7.api.entities;
+package com.ativ7.api.jpa.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +12,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "locacao")
-public class Locacao {
+public class LocacaoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLocacao")

@@ -31,7 +31,7 @@ public class SwaggerConfigurattion {
         return new Docket(DocumentationType.SWAGGER_2)
             .groupName("ativ7")
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.ativ7.api.resources"))
+            .apis(RequestHandlerSelectors.basePackage("com.ativ7.api"))
             .build()
             .ignoredParameterTypes(LocalDate.class, CompletableFuture.class)
             .directModelSubstitute(LocalDate.class, String.class)
@@ -54,7 +54,8 @@ public class SwaggerConfigurattion {
 
     private Tag[] resources() {
         return new Tag[] {
-            new Tag("Locação", "Este endpoint oferece serviços para locação de carros."),
+            new Tag("Locação - JPA", "Este endpoint oferece serviços para locação de carros em uma base de dados relacional."),
+            new Tag("Locação - Mongo", "Este endpoint oferece serviços para locação de carros em uma base de dados não relacional.")
         };
     }
 }
