@@ -30,7 +30,7 @@ http://localhost:8080/soo-ativ7
 ```
 
 ## Interface / Documentação
-Para faciltar os testes, o projeto uriliza o Swagger como documentador.
+Para faciltar os testes, o projeto utiliza o Swagger como documentador.
 Para acessá-lo basta usar a seguinte URL:
 
 ```
