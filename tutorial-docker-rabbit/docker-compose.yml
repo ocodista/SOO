@@ -1,0 +1,27 @@
+version: "3.5"
+
+services:
+  rabbit: 
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: fila-soo
+      RABBITMQ_DEFAULT_PASS: Grupo05@SOO
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: on-failure
+    volumes:
+      - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: "fazenda-vertical"
+      MYSQL_USER: "mysql-soo"
+      MYSQL_PASSWORD: "Grupo05@SOO"
+      MYSQL_ROOT_PASSWORD: "1@#!R00T0(*&"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql

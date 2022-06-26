@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.aula_soo.atividade6.FaturaTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.713 s - in com.aula_soo.atividade6.FaturaTest

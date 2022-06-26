@@ -1,0 +1,14 @@
+com\aula_soo\atividade6\models\Locacao.class
+com\aula_soo\atividade6\service\Fatura\ServiceFactory.class
+com\aula_soo\atividade6\dao\Fatura\FaturaDaoImpl.class
+com\aula_soo\atividade6\service\Fatura\FaturaService.class
+com\aula_soo\atividade6\models\FaturaDto.class
+com\aula_soo\atividade6\dao\Fatura\FaturaDao.class
+com\aula_soo\atividade6\utils\migrations\FaturaMigration.class
+com\aula_soo\atividade6\models\Fatura.class
+com\aula_soo\atividade6\utils\FabricaConexao.class
+com\aula_soo\atividade6\utils\IMySql.class
+com\aula_soo\atividade6\service\Fatura\FaturaServiceImpl.class
+com\aula_soo\atividade6\App.class
+com\aula_soo\atividade6\models\ItemFatura.class
+com\aula_soo\atividade6\dao\DaoFactory.class

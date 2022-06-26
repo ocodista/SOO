@@ -1,0 +1,14 @@
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\models\FaturaDto.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\models\ItemFatura.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\dao\Fatura\FaturaDaoImpl.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\dao\Fatura\FaturaDao.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\models\Locacao.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\service\Fatura\ServiceFactory.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\App.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\IMySql.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\migrations\FaturaMigration.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\dao\DaoFactory.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\models\Fatura.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\utils\FabricaConexao.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\service\Fatura\FaturaServiceImpl.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\src\main\java\com\aula_soo\atividade6\service\Fatura\FaturaService.java
