@@ -13,17 +13,6 @@ services:
     volumes:
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
 
-  mongodb:
-    image: mongo:5.0
-    ports:
-      - 27017:27017
-    volumes:
-      - ./volumes/mongo:/data/db
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo-soo
-      - MONGO_INITDB_ROOT_PASSWORD=Grupo05*SOO
-
   mysql:
     image: mysql:5.7
     restart: always
