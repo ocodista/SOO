@@ -1,0 +1,16 @@
+{
+  "name": "projeto-final",
+  "version": "1.0.0",
+  "description": "Projeto Final da disciplina SOO - Unesp de Rio Claro 2022",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Caio, Danilo e Esdras",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.0",
+    "dotenv": "^16.0.1"
+  }
+}

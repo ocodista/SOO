@@ -5,7 +5,7 @@ services:
     image: rabbitmq:3-management
     environment:
       RABBITMQ_DEFAULT_USER: fila-soo
-      RABBITMQ_DEFAULT_PASS: Grupo05@SOO
+      RABBITMQ_DEFAULT_PASS: Grupo05-SOO
     ports:
       - "15672:15672"
       - "5672:5672"
