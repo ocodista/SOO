@@ -21,12 +21,15 @@ import lombok.NoArgsConstructor;
 public class EstanteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idLocacao")
-    private Long idLocacao;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "status", nullable = false)
-    private Boolean status;
+    @Column(name = "qtdPrateleiras", nullable = false)
+    private int qtdPrateleiras;
 
-    @Column(name = "idPessoa")
-    private int idPessoa;
+    @Column(name = "qtdNichosPorPrateleira", nullable = false)
+    private int qtdNichosPorPrateleira;
+
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 }

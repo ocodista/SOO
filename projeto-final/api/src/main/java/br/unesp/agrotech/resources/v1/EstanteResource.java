@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import br.unesp.agrotech.dtos.InputAtualizarLocacaoDTO;
-import br.unesp.agrotech.dtos.InputLocacaoDTO;
-import br.unesp.agrotech.entities.LocacaoEntity;
-import br.unesp.agrotech.services.locacao.v1.LocacaoJpaService;
+import br.unesp.agrotech.dtos.EstanteDTO;
+import br.unesp.agrotech.entities.EstanteEntity;
+import br.unesp.agrotech.services.locacao.v1.EstanteService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,40 +23,39 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.RequiredArgsConstructor;
 
-@Api(tags = { "Locação - JPA" })
+@Api(tags = { "Estante" })
 @RestController
-@RequestMapping("locacao/jpa")
-@RequiredArgsConstructor
-public class LocacaoJpaResource {
+@RequestMapping("/estante")
+public class EstanteResource {
 
-    private final LocacaoJpaService locacaoService;
+    @Autowired
+    private EstanteService estanteService;
 
-    @ApiOperation(value = "Este serviço cadastra novas locações")
+    @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
-    public ResponseEntity<Void> cadastrarLocacao(
-        @ApiParam(value = "Dados da locação que será cadastrada", required = true)
-        @Valid @RequestBody InputLocacaoDTO inputLocacaoDTO
+    public ResponseEntity<Void> cadastrarEstante(
+        @ApiParam(value = "Dados da estante que será cadastrada", required = true)
+        @Valid @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        locacaoService.cadastrarLocacao(inputLocacaoDTO);
+        estanteService.cadastrar(estanteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<LocacaoEntity>> buscarLocacoes() throws Exception {
-        List<LocacaoEntity> listLocacao = locacaoService.buscarLocacoes();
-        return ResponseEntity.status(HttpStatus.OK).body(listLocacao);
+    public ResponseEntity<List<EstanteEntity>> buscarLocacoes() throws Exception {
+        List<EstanteEntity> listEstante = estanteService.buscar();
+        return ResponseEntity.status(HttpStatus.OK).body(listEstante);
     }
 
     @PutMapping("/{idLocacao}")
-    public ResponseEntity<LocacaoEntity> atualizarLocacao(
+    public ResponseEntity<EstanteEntity> atualizarLocacao(
         @ApiParam(value = "Id da locação a ser atualizada", required = true)
         @PathVariable("idLocacao") String idLocacao,
         @ApiParam(value = "Dados da locação que podem ser atualizados")
-        @RequestBody InputAtualizarLocacaoDTO inputAtualizarLocacaoDTO
+        @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        LocacaoEntity locacaoAtualizada = locacaoService.atualizarLocacao(Long.parseLong(idLocacao), inputAtualizarLocacaoDTO);
+        EstanteEntity locacaoAtualizada = estanteService.atualizar(Long.parseLong(idLocacao), estanteDTO);
         return ResponseEntity.status(HttpStatus.OK).body(locacaoAtualizada);
     }
 
@@ -65,7 +64,7 @@ public class LocacaoJpaResource {
         @ApiParam(value = "Id da locação a ser atualizada", required = true)
         @PathVariable("idLocacao") String idLocacao
     ) throws Exception {
-        locacaoService.deletarLocacao(Long.parseLong(idLocacao));
+        estanteService.deletar(Long.parseLong(idLocacao));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

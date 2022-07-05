@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InputLocacaoDTO {
-    private Boolean status;
-    private int idPessoa;
+public class EstanteDTO {
+    private int qtdPrateleiras;
+    private int qtdNichosPorPrateleira;
+    private String descricao;
 }
