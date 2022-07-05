@@ -26,8 +26,8 @@ const consume = async (queue, action) => {
 
 const publish = async (queue, object) => {
     const { connection, channel } = await getChannel(queue)
-    channel.publish("", "", Buffer.from(object))
-    console.log(`Message ${object} published to queue ${queue}`)
+    channel.publish('', queue, Buffer.from(JSON.stringify(object)))
+    console.log(`[INFO] - ${(new Date()).toLocaleDateString()} ${new Date().toLocaleTimeString()} Message published to queue ${queue}!\n\n`)
     setTimeout(() => {
         channel.close()
         connection.close()

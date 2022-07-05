@@ -1,6 +1,15 @@
 version: '3.5'
 
+networks:
+  rabbit_network:
+  db_network:
+
 services:
+  ## sensor:
+  ##   build: './dispositivos/Dockerfile.sensor'
+  ##   env_file: ./dispositivos/.env
+  
+
   rabbit: 
     image: rabbitmq:3-management
     environment:
@@ -9,6 +18,8 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+    networks:
+      - rabbit_network
     restart: on-failure
     volumes:
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
@@ -25,5 +36,7 @@ services:
       - '3306:3306'
     expose:
       - '3306'
+    networks:
+      - db_network
     volumes:
       - ./volumes/mysql:/var/lib/mysql
