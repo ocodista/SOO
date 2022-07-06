@@ -1,7 +1,6 @@
 br\unesp\agrotech\configurations\BeansConfiguration.class
 br\unesp\agrotech\services\locacao\v1\impl\EstanteServiceImpl.class
 br\unesp\agrotech\configurations\SecurityConfiguration.class
-br\unesp\agrotech\repositories\BaseRepository.class
 br\unesp\agrotech\services\locacao\v1\BaseService.class
 br\unesp\agrotech\configurations\SwaggerConfigurattion.class
 br\unesp\agrotech\entities\EstanteEntity$EstanteEntityBuilder.class
@@ -9,5 +8,6 @@ br\unesp\agrotech\resources\v1\EstanteResource.class
 br\unesp\agrotech\dtos\EstanteDTO.class
 br\unesp\agrotech\services\locacao\v1\EstanteService.class
 br\unesp\agrotech\services\locacao\v1\impl\BaseServiceImpl.class
+br\unesp\agrotech\repositories\EstanteRepository.class
 br\unesp\agrotech\App.class
 br\unesp\agrotech\entities\EstanteEntity.class

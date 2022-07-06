@@ -54,8 +54,7 @@ public class SwaggerConfigurattion {
 
     private Tag[] resources() {
         return new Tag[] {
-            new Tag("Locação - JPA", "Este endpoint oferece serviços para locação de carros em uma base de dados relacional."),
-            new Tag("Locação - Mongo", "Este endpoint oferece serviços para locação de carros em uma base de dados não relacional.")
+            new Tag("Estante", "Este endpoint oferece serviços em relação a estantes em uma base de dados relacional."),
         };
     }
 }

@@ -4,24 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.Assert;
 
-import br.unesp.agrotech.repositories.BaseRepository;
 import br.unesp.agrotech.services.locacao.v1.BaseService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class BaseServiceImpl<DTO, Entity> implements BaseService<DTO, Entity>{
+public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
 
     private final ModelMapper modelMapper;
-    private final BaseRepository<Entity> repository;
-
-    private Class<Entity> instance;
+    private final JpaRepository<E, Long> repository;
+    private final E entity;
 
     @Override
     public void cadastrar(DTO dto) throws Exception {
-        Entity entity = instance.getDeclaredConstructor().newInstance();
-
         modelMapper.map(dto, entity);
         try {
             repository.save(entity);
@@ -31,7 +28,7 @@ public class BaseServiceImpl<DTO, Entity> implements BaseService<DTO, Entity>{
     }
 
     @Override
-    public List<Entity> buscar() throws Exception {
+    public List<E> buscar() throws Exception {
         try {
             return repository.findAll();
         } catch(Exception exception) {
@@ -40,10 +37,10 @@ public class BaseServiceImpl<DTO, Entity> implements BaseService<DTO, Entity>{
     }
 
     @Override
-    public Entity buscarPorId(Long id) throws Exception {
+    public E buscarPorId(Long id) throws Exception {
         Assert.notNull(id, "O id é obrigatório");
         try {
-            Optional<Entity> findedEntity = repository.findById(id);
+            Optional<E> findedEntity = repository.findById(id);
             Assert.notNull(findedEntity, "Não existe nenhum dado com esse id");
             return findedEntity.get();
         } catch (Exception exception) {
@@ -52,10 +49,10 @@ public class BaseServiceImpl<DTO, Entity> implements BaseService<DTO, Entity>{
     }
 
     @Override
-    public Entity atualizar(Long id, DTO dto) throws Exception {
+    public E atualizar(Long id, DTO dto) throws Exception {
         try {
             Assert.notNull(id, "O identificador é obrigatório");
-            Entity entity = this.buscarPorId(id);
+            E entity = this.buscarPorId(id);
             Assert.notNull(dto, "É necessário passar alguma informação para atualizar os dados");
 
             modelMapper.map(dto, entity);

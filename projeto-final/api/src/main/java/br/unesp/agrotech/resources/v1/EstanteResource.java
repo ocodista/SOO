@@ -8,7 +8,6 @@ import br.unesp.agrotech.dtos.EstanteDTO;
 import br.unesp.agrotech.entities.EstanteEntity;
 import br.unesp.agrotech.services.locacao.v1.EstanteService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,14 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.RequiredArgsConstructor;
 
 @Api(tags = { "Estante" })
 @RestController
 @RequestMapping("/estante")
+@RequiredArgsConstructor
 public class EstanteResource {
 
-    @Autowired
-    private EstanteService estanteService;
+    private final EstanteService estanteService;
 
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
@@ -42,29 +42,32 @@ public class EstanteResource {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<EstanteEntity>> buscarLocacoes() throws Exception {
+    public ResponseEntity<List<EstanteEntity>> buscarEstantes() throws Exception {
         List<EstanteEntity> listEstante = estanteService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(listEstante);
     }
 
-    @PutMapping("/{idLocacao}")
+    @ApiOperation(value = "Este serviço atualiza uma estante através do id")
+    @PutMapping("/{idEstante}")
     public ResponseEntity<EstanteEntity> atualizarLocacao(
         @ApiParam(value = "Id da locação a ser atualizada", required = true)
-        @PathVariable("idLocacao") String idLocacao,
+        @PathVariable("idEstante") String idEstante,
         @ApiParam(value = "Dados da locação que podem ser atualizados")
         @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        EstanteEntity locacaoAtualizada = estanteService.atualizar(Long.parseLong(idLocacao), estanteDTO);
+        EstanteEntity locacaoAtualizada = estanteService.atualizar(Long.parseLong(idEstante), estanteDTO);
         return ResponseEntity.status(HttpStatus.OK).body(locacaoAtualizada);
     }
 
-    @DeleteMapping("/{idLocacao}")
+    @ApiOperation(value = "Este serviço remove uma estante através do id")
+    @DeleteMapping("/{idEstante}")
     public ResponseEntity<Void> deletarLocacao(
         @ApiParam(value = "Id da locação a ser atualizada", required = true)
-        @PathVariable("idLocacao") String idLocacao
+        @PathVariable("idEstante") String idEstante
     ) throws Exception {
-        estanteService.deletar(Long.parseLong(idLocacao));
+        estanteService.deletar(Long.parseLong(idEstante));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

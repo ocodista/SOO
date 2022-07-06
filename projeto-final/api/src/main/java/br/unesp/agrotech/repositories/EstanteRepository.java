@@ -1,9 +1,10 @@
 package br.unesp.agrotech.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.unesp.agrotech.entities.EstanteEntity;
 
 @Repository
-public interface EstanteRepository extends BaseRepository<EstanteEntity> {
+public interface EstanteRepository extends JpaRepository<EstanteEntity, Long> {
 }
