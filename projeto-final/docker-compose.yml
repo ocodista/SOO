@@ -5,16 +5,79 @@ networks:
   db_network:
 
 services:
-  ## sensor:
-  ##   build: './dispositivos/Dockerfile.sensor'
-  ##   env_file: ./dispositivos/.env
+  dispositivo_1:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      SENSOR_QUEUE: 'dispositivo-1'
+      CATEGORIA_ID: 1
+      CATEGORIA_NOME: 'Temperatura'
+      CATEGORIA_MEDIDA: 'ºC'
+      DISPOSITIVO_ID: 1
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
   
+  dispositivo_2:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 2
+      SENSOR_QUEUE: 'dispositivo-2'
+      CATEGORIA_ID: 2
+      CATEGORIA_NOME: 'Humidade do Ar'
+      CATEGORIA_MEDIDA: '%'
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
+
+  dispositivo_3:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 3
+      SENSOR_QUEUE: 'dispositivo-3'
+      CATEGORIA_ID: 3
+      CATEGORIA_NOME: 'Humidade do Solo'
+      CATEGORIA_MEDIDA: '%'
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
+  
+  dispositivo_4:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 4
+      SENSOR_QUEUE: 'dispositivo-4'
+      CATEGORIA_ID: 1
+      CATEGORIA_NOME: 'Temperatura'
+      CATEGORIA_MEDIDA: 'ºC'
+      POSICAO_VERTICAL: 2
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
 
   rabbit: 
     image: rabbitmq:3-management
     environment:
       RABBITMQ_DEFAULT_USER: fila-soo
-      RABBITMQ_DEFAULT_PASS: Grupo05-SOO
+      RABBITMQ_DEFAULT_PASS: Grupo05SOO
     ports:
       - "15672:15672"
       - "5672:5672"

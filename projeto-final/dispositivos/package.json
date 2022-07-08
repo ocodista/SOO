@@ -1,7 +1,7 @@
 {
   "name": "projeto-final",
   "version": "1.0.0",
-  "description": "Projeto Final da disciplina SOO - Unesp de Rio Claro 2022",
+  "description": "Projeto Final da disciplina SOO - Unesp de Rio Claro 2022  - Simulador de Dispositivos IOT",
   "main": "index.js",
   "type": "module",
   "scripts": {
