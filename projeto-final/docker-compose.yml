@@ -1,8 +1,10 @@
 version: '3.5'
+name: 'fazenda-vertical'
 
 networks:
-  rabbit_network:
+  api_network:
   db_network:
+  rabbit_network:
 
 services:
   dispositivo_1:
@@ -91,7 +93,9 @@ services:
     build:
       context: ./api
     networks:
+      - api_network
       - db_network
+      - rabbit_network
     restart: on-failure
     ports:
       - '8080:8080'
@@ -110,3 +114,11 @@ services:
       - db_network
     volumes:
       - ./volumes/mysql:/var/lib/mysql
+
+  frontend:
+    build:
+      context: front-end
+    networks:
+      - api_network
+    ports:
+      - '3000:3000'
