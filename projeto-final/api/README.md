@@ -26,7 +26,7 @@ mvn spring-boot:run
 Com isso o projeto será acessível na seguinte URL:
 
 ```
-http://localhost:8080/soo-ativ7
+http://localhost:8080/agrotech
 ```
 
 ## Interface / Documentação
@@ -34,5 +34,5 @@ Para faciltar os testes, o projeto utiliza o Swagger como documentador.
 Para acessá-lo basta usar a seguinte URL:
 
 ```
-http://localhost:8080/soo-ativ7/swagger-ui.html
+http://localhost:8080/agrotech/swagger-ui.html
 ```
