@@ -1,16 +1,28 @@
 import { Divider, Flex, GridItem, HStack, Switch, Text } from '@chakra-ui/react'
+import { ChangeEvent, useState } from 'react'
 
 export type NicheDetailProps = {
-  temperature?: number;
-  isLightOn?: boolean;
-  isWaterOn?: boolean;
-  moisture?: number;
-  nicheId?: number;
+  temperature: number;
+  isLightOn: boolean;
+  isWaterOn: boolean;
+  moisture: number;
+  nicheId: number;
   isEmpty?: boolean;
 }
 
 export function NicheDetail (props: NicheDetailProps) {
   const { isLightOn, isWaterOn, moisture, temperature, nicheId, isEmpty } = props
+  const [isWaterCheck, setIsWaterCheck] = useState<boolean>(isWaterOn)
+  const [isLightCheck, setIsLightCheck] = useState<boolean>(isLightOn)
+
+  function handleWaterCheck (e: ChangeEvent<HTMLInputElement>): void {
+    setIsWaterCheck(!isWaterCheck)
+  }
+
+  function handleLightCheck (e: ChangeEvent<HTMLInputElement>): void {
+    setIsLightCheck(!isLightCheck)
+  }
+
   return (
     <GridItem
       as={Flex}
@@ -31,7 +43,7 @@ export function NicheDetail (props: NicheDetailProps) {
           </HStack>
           <HStack width="100%" height="fit-content" justifyContent="space-between">
             <Text fontSize="14px" fontWeight="semibold" color="white">Iluminação</Text>
-            <Switch size="md" colorScheme="teal" isChecked={isLightOn}/>
+            <Switch size="md" colorScheme="teal" isChecked={isLightCheck} onChange={handleLightCheck} />
           </HStack>
 
           <Divider bgColor="" orientation='horizontal' />
@@ -43,7 +55,7 @@ export function NicheDetail (props: NicheDetailProps) {
 
           <HStack width="100%" height="fit-content" justifyContent="space-between">
             <Text fontSize="14px" fontWeight="semibold" color="white">Água</Text>
-            <Switch size="md" colorScheme="teal" isChecked={isWaterOn}/>
+            <Switch size="md" colorScheme="teal" isChecked={isWaterCheck} onChange={handleWaterCheck}/>
           </HStack>
         </>
           )
