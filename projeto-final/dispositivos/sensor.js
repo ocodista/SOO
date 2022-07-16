@@ -80,13 +80,13 @@ const getDispositivo = () => {
 
   while (true) {
     value += getRandomArbitrary(-0.3, 0.3)
-
-    console.log(`Valor: ${parseFloat(value).toFixed(2)} `)
+    value = + parseFloat(value).toFixed(2)
 
     const msg = {
-      creadoEm: new Date(),
-      dispositivo,
-      valor: value
+      sentAt: new Date(),
+      id: parseInt(dispositivo.id, 10),
+      label: dispositivo.categoria.medida,
+      value
     }
 
     console.log(`Publicando na fila ${sensorQueue}...`)

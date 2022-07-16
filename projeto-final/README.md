@@ -1,18 +1,29 @@
 # Inicialização
 
-## Docker
-Para roda a aplicação, é necessário ter Docker instalado em seu computador.  
+## Build
+Para realizar o processo de build, basta executar o seguinte comando
 
-Para iniciar todas as aplicações, rode
+```
+mvn clean install
+```
+
+## Banco de Dados
+O sistema utiliza o Docker como ambiente virtual para Banco de Dados,
+sendo assim é necessário ter o docker instalado em sua máquina.
+Além disso, para subir esse ambiente, execute o seguinte comando:
 
 ```
 docker-compose up -d
 ```
-## Banco de Dados
-Ele estará rodando em um container chamado database e também é acessível através do localhost:3306
 
-## API
-Após iniciar o projeto, é possível consumir a API Rest através da seguinte URL:
+## Iniciar o projeto
+A seguir execute o seguinte comando para subir o projeto
+
+```
+mvn spring-boot:run
+```
+
+Com isso o projeto será acessível na seguinte URL:
 
 ```
 http://localhost:8080/agrotech
@@ -24,12 +35,4 @@ Para acessá-lo basta usar a seguinte URL:
 
 ```
 http://localhost:8080/agrotech/swagger-ui.html
-```
-
-## Testes
-Para rodar os testes, rode
-
-```
-cd api
-mvn clean test
 ```
