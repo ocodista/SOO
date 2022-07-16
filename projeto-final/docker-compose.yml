@@ -14,7 +14,7 @@ services:
     env_file: ./dispositivos/sensor.env
     restart: on-failure
     environment:
-      SENSOR_QUEUE: 'estante-1'
+      SENSOR_QUEUE: ${FILA_ESTANTE}
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
@@ -33,8 +33,8 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 2
-      SENSOR_QUEUE: 'estante-1'
-      INTERVAL_SECONDS: 3
+      SENSOR_QUEUE: ${FILA_ESTANTE}
+      INTERVAL_SECONDS: 4
       CATEGORIA_ID: 2
       CATEGORIA_NOME: 'Umidade do Ar'
       CATEGORIA_MEDIDA: '%'
@@ -51,7 +51,7 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 3
-      SENSOR_QUEUE: 'estante-1'
+      SENSOR_QUEUE: ${FILA_ESTANTE}
       INTERVAL_SECONDS: 5
       CATEGORIA_ID: 3
       CATEGORIA_NOME: 'Umidade do Solo'
@@ -69,8 +69,8 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 4
-      SENSOR_QUEUE: 'estante-1'
-      INTERVAL_SECONDS: 8
+      SENSOR_QUEUE: ${FILA_ESTANTE}
+      INTERVAL_SECONDS: 6
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
