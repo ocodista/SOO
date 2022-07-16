@@ -14,7 +14,7 @@ services:
     env_file: ./dispositivos/sensor.env
     restart: on-failure
     environment:
-      SENSOR_QUEUE: 'dispositivo-1'
+      SENSOR_QUEUE: 'estante-1'
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
@@ -25,22 +25,23 @@ services:
     networks:
       - rabbit_network
 #  
-#  dispositivo_2:
-#    build:
-#      context: ./dispositivos
-#      dockerfile: Dockerfile.sensor
-#    env_file: ./dispositivos/sensor.env
-#    restart: on-failure
-#    environment:
-#      DISPOSITIVO_ID: 2
-#      SENSOR_QUEUE: 'dispositivo-2'
-#      CATEGORIA_ID: 2
-#      CATEGORIA_NOME: 'Humidade do Ar'
-#      CATEGORIA_MEDIDA: '%'
-#      POSICAO_VERTICAL: 1
-#      POSICAO_HORIZONTAL: 1
-#    networks:
-#      - rabbit_network
+  dispositivo_2:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 2
+      SENSOR_QUEUE: 'estante-1'
+      INTERVAL_SECONDS: 3
+      CATEGORIA_ID: 2
+      CATEGORIA_NOME: 'Humidade do Ar'
+      CATEGORIA_MEDIDA: '%'
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
 #
 #  dispositivo_3:
 #    build:
@@ -102,6 +103,8 @@ services:
       - '8080:8080'
     environment:
       SPRING_DATASOURCE_URL: 'jdbc:mysql://database:3306/fazenda-vertical'
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_QUEUE: estante-1
 
   database:
     image: mysql:5.7
