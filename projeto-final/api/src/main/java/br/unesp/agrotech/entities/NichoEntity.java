@@ -1,13 +1,11 @@
 package br.unesp.agrotech.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,21 +19,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "estante")
-public class EstanteEntity {
+public class NichoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "qtdPrateleiras", nullable = false)
-    private int qtdPrateleiras;
+    @Column(name = "posicaoHorizontal", nullable = false)
+    private int posicaoHorizontal;
 
-    @Column(name = "qtdNichosPorPrateleira", nullable = false)
-    private int qtdNichosPorPrateleira;
-
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
-
-    @OneToMany
-    private List<DispositivoEntity> dispositivos;
+    @ManyToOne
+    private PrateleiraEntity prateleira;
 }
