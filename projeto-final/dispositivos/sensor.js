@@ -86,6 +86,7 @@ const getDispositivo = () => {
       sentAt: new Date(),
       id: parseInt(dispositivo.id, 10),
       label: dispositivo.categoria.medida,
+      category: dispositivo.categoria.nome,
       value
     }
 
