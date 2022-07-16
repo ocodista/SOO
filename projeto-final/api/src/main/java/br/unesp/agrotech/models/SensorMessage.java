@@ -26,6 +26,9 @@ public class SensorMessage implements Serializable {
     @JsonProperty("label")
     private String label;
 
+    @JsonProperty("category")
+    private String category;
+
     @JsonProperty
     private Date sentAt;
 
@@ -33,6 +36,6 @@ public class SensorMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + formatter.format(sentAt) + "] Sensor " + id +": " + value + " " + label;
+        return "[" + formatter.format(sentAt) + "] Sensor " + id +" ("+ category +"): " + value + " " + label;
     }
 }

@@ -16,6 +16,6 @@ public class RabbitConsumer {
 
     @RabbitHandler
     public void consume(SensorMessage message) {
-        logger.info("\n" + message.toString());
+        logger.info(message.toString());
     }
 }
