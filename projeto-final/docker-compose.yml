@@ -14,66 +14,70 @@ services:
     env_file: ./dispositivos/sensor.env
     restart: on-failure
     environment:
-      SENSOR_QUEUE: 'dispositivo-1'
+      SENSOR_QUEUE: ${FILA_ESTANTE}
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
+      INTERVAL_SECONDS: 3
       DISPOSITIVO_ID: 1
       POSICAO_VERTICAL: 1
       POSICAO_HORIZONTAL: 1
     networks:
       - rabbit_network
 #  
-#  dispositivo_2:
-#    build:
-#      context: ./dispositivos
-#      dockerfile: Dockerfile.sensor
-#    env_file: ./dispositivos/sensor.env
-#    restart: on-failure
-#    environment:
-#      DISPOSITIVO_ID: 2
-#      SENSOR_QUEUE: 'dispositivo-2'
-#      CATEGORIA_ID: 2
-#      CATEGORIA_NOME: 'Humidade do Ar'
-#      CATEGORIA_MEDIDA: '%'
-#      POSICAO_VERTICAL: 1
-#      POSICAO_HORIZONTAL: 1
-#    networks:
-#      - rabbit_network
+  dispositivo_2:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 2
+      SENSOR_QUEUE: ${FILA_ESTANTE}
+      INTERVAL_SECONDS: 4
+      CATEGORIA_ID: 2
+      CATEGORIA_NOME: 'Umidade do Ar'
+      CATEGORIA_MEDIDA: '%'
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
 #
-#  dispositivo_3:
-#    build:
-#      context: ./dispositivos
-#      dockerfile: Dockerfile.sensor
-#    env_file: ./dispositivos/sensor.env
-#    restart: on-failure
-#    environment:
-#      DISPOSITIVO_ID: 3
-#      SENSOR_QUEUE: 'dispositivo-3'
-#      CATEGORIA_ID: 3
-#      CATEGORIA_NOME: 'Humidade do Solo'
-#      CATEGORIA_MEDIDA: '%'
-#      POSICAO_VERTICAL: 1
-#      POSICAO_HORIZONTAL: 1
-#    networks:
-#      - rabbit_network
+  dispositivo_3:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 3
+      SENSOR_QUEUE: ${FILA_ESTANTE}
+      INTERVAL_SECONDS: 5
+      CATEGORIA_ID: 3
+      CATEGORIA_NOME: 'Umidade do Solo'
+      CATEGORIA_MEDIDA: '%'
+      POSICAO_VERTICAL: 1
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
 #  
-#  dispositivo_4:
-#    build:
-#      context: ./dispositivos
-#      dockerfile: Dockerfile.sensor
-#    env_file: ./dispositivos/sensor.env
-#    restart: on-failure
-#    environment:
-#      DISPOSITIVO_ID: 4
-#      SENSOR_QUEUE: 'dispositivo-4'
-#      CATEGORIA_ID: 1
-#      CATEGORIA_NOME: 'Temperatura'
-#      CATEGORIA_MEDIDA: 'ºC'
-#      POSICAO_VERTICAL: 2
-#      POSICAO_HORIZONTAL: 1
-#    networks:
-#      - rabbit_network
+  dispositivo_4:
+    build:
+      context: ./dispositivos
+      dockerfile: Dockerfile.sensor
+    env_file: ./dispositivos/sensor.env
+    restart: on-failure
+    environment:
+      DISPOSITIVO_ID: 4
+      SENSOR_QUEUE: ${FILA_ESTANTE}
+      INTERVAL_SECONDS: 6
+      CATEGORIA_ID: 1
+      CATEGORIA_NOME: 'Temperatura'
+      CATEGORIA_MEDIDA: 'ºC'
+      POSICAO_VERTICAL: 2
+      POSICAO_HORIZONTAL: 1
+    networks:
+      - rabbit_network
 #
   rabbit: 
     image: rabbitmq:3-management
@@ -99,6 +103,10 @@ services:
     restart: on-failure
     ports:
       - '8080:8080'
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://database:3306/fazenda-vertical'
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_QUEUE: estante-1
 
   database:
     image: mysql:5.7
