@@ -20,9 +20,9 @@ const addSensorIfNew = (state, msg) => {
 
 const getSensor = (state, id) => (state.sensors.find(sensor => sensor.id === id))
 
-const addSensorValue = (state, value, id) => {
+const addSensorValue = (state, value, sentAt, id) => {
   const sensor = getSensor(state, id)
-  sensor.values.push(value)
+  sensor.values.push({ sentAt, value })
 }
 
 export const sensorSlice = createSlice({
@@ -30,9 +30,9 @@ export const sensorSlice = createSlice({
   initialState,
   reducers: {
     addMessage: (state, { payload: msg }) => {
-      const { id, value } = msg
+      const { id, value, sentAt } = msg
       addSensorIfNew(state, msg)
-      addSensorValue(state, value, id)
+      addSensorValue(state, value, sentAt, id)
     }
   }
 });
