@@ -137,18 +137,7 @@ services:
     networks:
       - api_network
     environment:
-      REACT_APP_HOST_SOCKET_URL: 'http://localhost:8080/agrotech/ws'
+      REACT_APP_HOST_SOCKET_URL: 'http://api:8080/agrotech/ws'
       PORT: 3001
     ports:
       - '3001:3001'
-
-  socket_server:
-    build:
-      context: ./socket/server
-    restart: on-failure
-    networks:
-      - api_network
-    environment:
-      PORT: 3155
-    ports:
-    - "3155:3155"
