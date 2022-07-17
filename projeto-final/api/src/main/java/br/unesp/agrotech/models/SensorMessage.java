@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -32,10 +31,9 @@ public class SensorMessage implements Serializable {
     @JsonProperty
     private Date sentAt;
 
-    private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
     @Override
     public String toString() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return "[" + formatter.format(sentAt) + "] Sensor " + id +" ("+ category +"): " + value + " " + label;
     }
 }
