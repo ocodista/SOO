@@ -1,0 +1,27 @@
+<script>
+  var HOST = location.origin.replace(/^http/, "ws");
+  var ws = new WebSocket(HOST);
+  var el;
+
+  ws.onopen = function (event) {
+    var p = document.getElementById("socket-path");
+    p.innerHTML = HOST;
+  };
+  ws.onmessage = function (event) {
+    el = document.getElementById("server-message");
+    el.innerHTML = "Message received: " + event.data;
+  };
+
+  ws.onpong = function () {
+    console.log("received pong!");
+  }
+
+  ws.onping = function () {
+    console.log("received ping!");
+  }
+</script>
+
+<body>
+  <h1>Running socket client at <span id="socket-path"></span></h1>
+  <p><span id="server-message"></span></p>
+</body>

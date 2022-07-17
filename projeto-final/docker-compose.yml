@@ -7,6 +7,17 @@ networks:
   rabbit_network:
 
 services:
+  socket_server:
+    build:
+      context: ./socket/server
+    restart: on-failure
+    networks:
+      - api_network
+    environment:
+      PORT: 3155
+    ports:
+    - "3155:3155"
+
   dispositivo_1:
     build:
       context: ./dispositivos
@@ -18,13 +29,13 @@ services:
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
-      INTERVAL_SECONDS: 3
+      INTERVAL_SECONDS: 5
       DISPOSITIVO_ID: 1
       POSICAO_VERTICAL: 1
       POSICAO_HORIZONTAL: 1
     networks:
       - rabbit_network
-#  
+#
   dispositivo_2:
     build:
       context: ./dispositivos
@@ -60,7 +71,7 @@ services:
       POSICAO_HORIZONTAL: 1
     networks:
       - rabbit_network
-#  
+#
   dispositivo_4:
     build:
       context: ./dispositivos
@@ -79,7 +90,7 @@ services:
     networks:
       - rabbit_network
 #
-  rabbit: 
+  rabbit:
     image: rabbitmq:3-management
     environment:
       RABBITMQ_DEFAULT_USER: fila-soo
@@ -92,7 +103,7 @@ services:
     restart: on-failure
     volumes:
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
-  
+
   api:
     build:
       context: ./api

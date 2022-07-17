@@ -1,0 +1,21 @@
+{
+  "name": "alert-socket",
+  "version": "1.0.0",
+  "description": "Socket to broadcast messages",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "author": "Caio Borghi",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^3.1.0",
+    "socket.io-client": "^3.1.0",
+    "utf-8-validate": "^5.0.4",
+    "ws": "^7.4.2"
+  }
+}
