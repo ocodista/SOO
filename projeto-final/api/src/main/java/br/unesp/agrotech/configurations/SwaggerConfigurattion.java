@@ -55,6 +55,8 @@ public class SwaggerConfigurattion {
     private Tag[] resources() {
         return new Tag[] {
             new Tag("Estante", "Este endpoint oferece serviços em relação a estantes em uma base de dados relacional."),
+            new Tag("Dispositivos", "Este endpoint oferece serviços em relação a estantes em uma base de dados relacional."),
+            new Tag("Chat", "Este endpoint oferece serviços em relação a estantes em uma base de dados relacional."),
         };
     }
 }
