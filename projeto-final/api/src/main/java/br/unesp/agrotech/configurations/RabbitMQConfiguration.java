@@ -1,4 +1,4 @@
-package br.unesp.agrotech.utils;
+package br.unesp.agrotech.configurations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +19,7 @@ import org.springframework.util.ErrorHandler;
 
 @EnableRabbit
 @Configuration
-public class RabbitMQConfig {
+public class RabbitMQConfiguration {
     @Value("${rabbitmq.queue}")
     private String queueName;
     @Value("${rabbitmq.exchange}")
@@ -43,7 +43,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(queueName, true);
     }
 
     @Bean
