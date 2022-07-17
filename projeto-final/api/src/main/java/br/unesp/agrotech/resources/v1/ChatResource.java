@@ -1,6 +1,6 @@
 package br.unesp.agrotech.resources.v1;
 
-import br.unesp.agrotech.dtos.Message;
+import br.unesp.agrotech.models.SensorMessage;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -20,14 +20,12 @@ public class ChatResource {
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
-    public Message receiveMessage(@Payload Message message){
+    public SensorMessage receiveMessage(@Payload SensorMessage message){
         return message;
     }
 
-    @MessageMapping("/private-message")
-    public Message recMessage(@Payload Message message){
-        simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
-        System.out.println(message.toString());
-        return message;
+    @MessageMapping("/test-message")
+    public void testMessage(SensorMessage message) {
+        simpMessagingTemplate.convertAndSend("/chatroom/public", message);
     }
 }
