@@ -39,13 +39,11 @@ public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
     @Override
     public E buscarPorId(Long id) throws Exception {
         Assert.notNull(id, "O id é obrigatório");
-        try {
-            Optional<E> findedEntity = repository.findById(id);
-            Assert.notNull(findedEntity, "Não existe nenhum dado com esse id");
-            return findedEntity.get();
-        } catch (Exception exception) {
-           throw new Exception("Erro ao buscar dados pelo id passado", exception);
+        Optional<E> findedEntity = repository.findById(id);
+        if (!findedEntity.isPresent()) {
+            throw new Exception("Não há dados com o id informado");
         }
+        return findedEntity.get();
     }
 
     @Override

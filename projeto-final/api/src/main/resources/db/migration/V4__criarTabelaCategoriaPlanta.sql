@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS `categoria_planta` (
 	`nome` VARCHAR(255) NOT NULL,
 	`tipoTerra` VARCHAR(255) NOT NULL,
     `temperaturaIdeal` FLOAT NOT NULL,
-    `consumoAguaPorDia` FLOAT NOT NULL,
+    `consumoAguaPorDia` FLOAT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;

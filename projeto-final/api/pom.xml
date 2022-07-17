@@ -17,6 +17,7 @@
 		<java.version>8</java.version>
         <springfox.version>2.9.2</springfox.version>
         <modelmapper.version>2.3.0</modelmapper.version>
+
 	</properties>
 
 	<dependencies>
@@ -96,6 +97,11 @@
             <artifactId>log4j-core</artifactId>
             <version>2.15.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -122,6 +128,14 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>8.0.0</version>
+                <configuration>
+                    <user>mysql-soo</user>
+                    <password>Grupo05@SOO</password>
+                    <url>jdbc:mysql://localhost:3306/fazenda-vertical</url>
+                    <!-- <schemas>
+                        <schema>fazenda-vertical</schema>
+                    </schemas> -->
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
