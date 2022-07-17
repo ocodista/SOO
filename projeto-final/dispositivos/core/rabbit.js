@@ -7,7 +7,7 @@ const getChannel = async (queue) => {
     const connection = await amqplib.connect(connectionString, "heartbeat=60")
     const channel = await connection.createChannel()
     await connection.createChannel()
-    await channel.assertQueue(queue, { durable: false })
+    await channel.assertQueue(queue, { durable: true })
     return { connection, channel }
 }
 
