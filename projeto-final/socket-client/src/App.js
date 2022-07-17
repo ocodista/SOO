@@ -6,6 +6,7 @@ import { over } from 'stompjs'
 import './App.css';
 import { Sensors } from './features/sensor-update/Sensors';
 
+const SOCKET_URL = process.env.REACT_APP_HOST_SOCKET_URL || 'http://localhost:8080/agrotech/ws'
 let stompClient
 function App() {
   const dispatch = useDispatch()
@@ -13,7 +14,6 @@ function App() {
   useEffect(() => {
     const onMessageReceived = (payload) => {
       var parsedMessage = JSON.parse(payload.body);
-      console.log('Message =>', parsedMessage)
       dispatch(addMessage(parsedMessage))
       return
     }
@@ -21,7 +21,8 @@ function App() {
       stompClient.subscribe('/sensors/update', onMessageReceived);
     }
 
-    let Sock = new SockJS('http://localhost:8080/agrotech/ws');
+    console.log(`Conectando em ${SOCKET_URL}...`)
+    let Sock = new SockJS(SOCKET_URL);
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, (err) => console.error(err));
 
