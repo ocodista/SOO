@@ -1,14 +1,16 @@
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\DispositivoEntity.java
-D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\SecurityConfiguration.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\utils\RabbitConsumer.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\services\locacao\v1\EstanteService.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\resources\v1\ChatResource.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\services\locacao\v1\impl\DispositivoServiceImpl.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\EstanteDTO.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\TextMessageDTO.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\CategoriaDispositivoEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\BeansConfiguration.java
-D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\utils\RabbitMQConfig.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\TipoDispositivoEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\resources\v1\RabbitSenderResource.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\WebSocketConfig.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\Message.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\utils\RabbitSender.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\EstanteEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\App.java
@@ -24,5 +26,6 @@ D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\ja
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\repositories\CategoriaDispositivoRepository.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\services\locacao\v1\DispositivoService.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\repositories\TipoDispositivoRepository.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\RabbitMQConfiguration.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\NichoEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\repositories\EstanteRepository.java
