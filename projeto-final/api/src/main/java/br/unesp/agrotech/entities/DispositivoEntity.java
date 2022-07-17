@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,22 +27,22 @@ public class DispositivoEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "value", nullable = false)
+    @Column(name = "value")
     private Double value;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idEstante", nullable = false)
+    @JoinColumn(name = "idEstante")
     private EstanteEntity estante;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idTipoDispositivo", nullable = false)
+    @JoinColumn(name = "idTipoDispositivo")
     private TipoDispositivoEntity tipoDispositivo;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idCategoriaDispositivo", nullable = false)
+    @JoinColumn(name = "idCategoriaDispositivo")
     private CategoriaDispositivoEntity categoriaDispositivo;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idNicho", nullable = false)
+    @JoinColumn(name = "idNicho")
     private NichoEntity nicho;
 }

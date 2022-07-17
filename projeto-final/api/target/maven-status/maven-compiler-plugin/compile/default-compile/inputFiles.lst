@@ -9,6 +9,7 @@ D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\ja
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\EstanteDTO.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\TextMessageDTO.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\CategoriaDispositivoEntity.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\CategoriaPlantaEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\BeansConfiguration.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\DispositivoDTO.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\repositories\NichoRepository.java
@@ -17,6 +18,7 @@ D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\ja
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\configurations\WebSocketConfig.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\repositories\PrateleiraRepository.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\dtos\Message.java
+D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\PlantaEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\utils\RabbitSender.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\entities\EstanteEntity.java
 D:\Projetos pessoais\Unesp\SOO\soo-atividade6-main\projeto-final\api\src\main\java\br\unesp\agrotech\services\locacao\v1\impl\CategoriaDispositivoServiceImpl.java
