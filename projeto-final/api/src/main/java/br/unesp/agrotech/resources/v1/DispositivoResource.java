@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.unesp.agrotech.dtos.DispositivoDTO;
 import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
 import io.swagger.annotations.Api;
@@ -32,37 +33,37 @@ public class DispositivoResource {
 
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
-    public ResponseEntity<Void> cadastrarEstante(
+    public ResponseEntity<Void> cadastrarDispositivo(
         @ApiParam(value = "Dados da estante que será cadastrada", required = true)
-        @Valid @RequestBody DispositivoEntity dispositivo
+        @Valid @RequestBody DispositivoDTO dispositivoDto
     ) throws Exception {
-        dispositivoService.cadastrar(dispositivo);
+        dispositivoService.cadastrar(dispositivoDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<DispositivoEntity>> buscarEstantes() throws Exception {
+    public ResponseEntity<List<DispositivoEntity>> buscarDispositivo() throws Exception {
         List<DispositivoEntity> dispositivos = dispositivoService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(dispositivos);
     }
 
-    @ApiOperation(value = "Este serviço atualiza uma estante através do id")
+    @ApiOperation(value = "Este serviço atualiza um dispositivo através do id")
     @PutMapping("/{idDispositivo}")
-    public ResponseEntity<DispositivoEntity> atualizarLocacao(
-        @ApiParam(value = "Id da locação a ser atualizada", required = true)
+    public ResponseEntity<DispositivoEntity> atualizarDispositivo(
+        @ApiParam(value = "Id do dispositivo a ser atualizada", required = true)
         @PathVariable("idDispositivo") String idDispositivo,
-        @ApiParam(value = "Dados da locação que podem ser atualizados")
-        @RequestBody DispositivoEntity dispositivoEntity
+        @ApiParam(value = "Dados do dispositivo que podem ser atualizados")
+        @RequestBody DispositivoDTO dispositivoDto
     ) throws Exception {
-        DispositivoEntity locacaoAtualizada = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoEntity);
-        return ResponseEntity.status(HttpStatus.OK).body(locacaoAtualizada);
+        DispositivoEntity dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoDto);
+        return ResponseEntity.status(HttpStatus.OK).body(dispositivoAtualizado);
     }
 
     @ApiOperation(value = "Este serviço remove uma estante através do id")
     @DeleteMapping("/{idDispositivo}")
-    public ResponseEntity<Void> deletarLocacao(
-        @ApiParam(value = "Id da locação a ser atualizada", required = true)
+    public ResponseEntity<Void> deletarDispositivo(
+        @ApiParam(value = "Id do dispositivo a ser removid", required = true)
         @PathVariable("idDispositivo") String idDispositivo
     ) throws Exception {
         dispositivoService.deletar(Long.parseLong(idDispositivo));

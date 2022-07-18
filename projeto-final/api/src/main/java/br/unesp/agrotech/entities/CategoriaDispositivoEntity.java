@@ -21,12 +21,11 @@ import lombok.NoArgsConstructor;
 public class CategoriaDispositivoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "medida", nullable = false)
+    @Column(name = "medida")
     private String medida;
 }

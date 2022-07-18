@@ -2,5 +2,5 @@ CREATE TABLE IF NOT EXISTS `prateleira` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`posicaoVertical` int NOT NULL,
 	`idEstante` BIGINT(20) NOT NULL,
-    CONSTRAINT `fk_estante` FOREIGN KEY (`idEstante`) REFERENCES `estante`(`id`)
+    FOREIGN KEY (`idEstante`) REFERENCES `estante`(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;

@@ -1,6 +1,6 @@
 package br.unesp.agrotech.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -36,6 +34,9 @@ public class EstanteEntity {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @OneToMany
-    private List<DispositivoEntity> dispositivos;
+    @OneToMany(mappedBy = "estante")
+    private Set<DispositivoEntity> dispositivos;
+
+    @OneToMany(mappedBy = "estante")
+    private Set<PrateleiraEntity> prateleiras;
 }

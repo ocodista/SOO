@@ -1,5 +1,5 @@
-version: '3.5'
-name: 'fazenda-vertical'
+version: '3.3'
+# name: fazenda-vertical
 
 networks:
   api_network:
@@ -14,7 +14,7 @@ services:
     env_file: ./dispositivos/sensor.env
     restart: on-failure
     environment:
-      SENSOR_QUEUE: ${FILA_ESTANTE}
+      SENSOR_QUEUE: estante-1
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
@@ -33,7 +33,7 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 2
-      SENSOR_QUEUE: ${FILA_ESTANTE}
+      SENSOR_QUEUE: estante-1
       INTERVAL_SECONDS: 4
       CATEGORIA_ID: 2
       CATEGORIA_NOME: 'Umidade do Ar'
@@ -51,7 +51,7 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 3
-      SENSOR_QUEUE: ${FILA_ESTANTE}
+      SENSOR_QUEUE: estante-1
       INTERVAL_SECONDS: 5
       CATEGORIA_ID: 3
       CATEGORIA_NOME: 'Umidade do Solo'
@@ -69,7 +69,7 @@ services:
     restart: on-failure
     environment:
       DISPOSITIVO_ID: 4
-      SENSOR_QUEUE: ${FILA_ESTANTE}
+      SENSOR_QUEUE: estante-1
       INTERVAL_SECONDS: 6
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
@@ -109,7 +109,7 @@ services:
       RABBITMQ_QUEUE: estante-1
 
   database:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: always
     environment:
       MYSQL_DATABASE: 'fazenda-vertical'

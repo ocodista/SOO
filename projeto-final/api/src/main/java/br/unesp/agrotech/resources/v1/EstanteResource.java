@@ -51,20 +51,20 @@ public class EstanteResource {
 
     @ApiOperation(value = "Este serviço atualiza uma estante através do id")
     @PutMapping("/{idEstante}")
-    public ResponseEntity<EstanteEntity> atualizarLocacao(
-        @ApiParam(value = "Id da locação a ser atualizada", required = true)
+    public ResponseEntity<EstanteEntity> atualizarEstante(
+        @ApiParam(value = "Id da estante a ser atualizada", required = true)
         @PathVariable("idEstante") String idEstante,
-        @ApiParam(value = "Dados da locação que podem ser atualizados")
+        @ApiParam(value = "Dados da estante que podem ser atualizados")
         @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        EstanteEntity locacaoAtualizada = estanteService.atualizar(Long.parseLong(idEstante), estanteDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(locacaoAtualizada);
+        EstanteEntity estanteAtualizada = estanteService.atualizar(Long.parseLong(idEstante), estanteDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(estanteAtualizada);
     }
 
     @ApiOperation(value = "Este serviço remove uma estante através do id")
     @DeleteMapping("/{idEstante}")
-    public ResponseEntity<Void> deletarLocacao(
-        @ApiParam(value = "Id da locação a ser atualizada", required = true)
+    public ResponseEntity<Void> deletarEstante(
+        @ApiParam(value = "Id da estante a ser removida", required = true)
         @PathVariable("idEstante") String idEstante
     ) throws Exception {
         estanteService.deletar(Long.parseLong(idEstante));

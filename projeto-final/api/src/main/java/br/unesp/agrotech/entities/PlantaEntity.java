@@ -1,39 +1,41 @@
 package br.unesp.agrotech.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "estante")
-public class NichoEntity {
+@Table(name = "planta")
+public class PlantaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "posicaoHorizontal")
-    private int posicaoHorizontal;
+    @Column(name = "nome")
+    private String nome;
 
-    @ManyToOne
-    private PrateleiraEntity prateleira;
+    @Column(name = "dataPlantio")
+    private int dataPlantio;
 
-    @OneToMany
-    private List<DispositivoEntity> dispositivos;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "idNicho")
+    private NichoEntity nicho;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "idCategoriaPlanta")
+    private CategoriaPlantaEntity categoriaPlanta;
 }
