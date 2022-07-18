@@ -1,8 +1,6 @@
 package br.unesp.agrotech.utils;
 
 import br.unesp.agrotech.models.SensorMessage;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.stereotype.Component;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

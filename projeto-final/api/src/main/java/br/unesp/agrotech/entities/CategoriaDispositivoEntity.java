@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class CategoriaDispositivoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "nome")
