@@ -3,8 +3,21 @@ import { useSelector } from 'react-redux';
 import {
   selectSensors,
 } from './sensorsSlice';
+import SensorChart from '../sensor-chart/SensorChart'
 
 const leadingZero = (str) => (str.toString().length === 1 ? `0${str}` : str)
+
+const formattedTime = (dateStr) => {
+  let d = dateStr
+  if (typeof (dateStr) !== typeof (Date)) {
+    d = new Date(dateStr)
+  }
+
+  let hours = leadingZero(d.getHours())
+  let minutes = leadingZero(d.getMinutes())
+  let seconds = leadingZero(d.getSeconds())
+  return `${hours}:${minutes}:${seconds}`
+}
 
 const formattedDate = (dateStr) => {
   const d = new Date(dateStr)
@@ -26,16 +39,20 @@ function Message({ sentAt, value, label, idx }) {
 }
 
 function Sensor({ id, category, label, values }) {
-
+  const name = `Sensor ${id} (${category})`
+  const chartData = values.map(({ value, sentAt }) => ({
+    name,
+    value,
+    sentAt: formattedTime(sentAt)
+  }))
 
   const renderValues = () => (
     values.map((value, idx) => <Message {...value} label={label} idx={idx} />)
   )
 
   return (
-    <section>
-      <h2>Sensor {id} ({category})</h2>
-      {renderValues()}
+    <section className="wh-50" style={{ paddingBottom: 20 }}>
+      <SensorChart title={name} data={chartData} />
     </section>
   )
 }
@@ -45,9 +62,11 @@ export function Sensors() {
   const sensors = useSelector(selectSensors);
 
   return (
-    <div>
-      <h1>Sensores</h1>
-      {sensors.map((sensor, i) => <Sensor key={i} {...sensor} />)}
-    </div>
+    <>
+      <h1>Sensores - Estante 1</h1>
+      <div class="wh-100" >
+        {sensors.map((sensor, i) => <Sensor key={i} {...sensor} />)}
+      </div>
+    </>
   );
 }
