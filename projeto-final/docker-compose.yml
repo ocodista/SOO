@@ -18,13 +18,13 @@ services:
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
-      INTERVAL_SECONDS: 3
+      INTERVAL_SECONDS: 5
       DISPOSITIVO_ID: 1
       POSICAO_VERTICAL: 1
       POSICAO_HORIZONTAL: 1
     networks:
       - rabbit_network
-#  
+#
   dispositivo_2:
     build:
       context: ./dispositivos
@@ -60,7 +60,7 @@ services:
       POSICAO_HORIZONTAL: 1
     networks:
       - rabbit_network
-#  
+#
   dispositivo_4:
     build:
       context: ./dispositivos
@@ -79,7 +79,7 @@ services:
     networks:
       - rabbit_network
 #
-  rabbit: 
+  rabbit:
     image: rabbitmq:3-management
     environment:
       RABBITMQ_DEFAULT_USER: fila-soo
@@ -92,7 +92,7 @@ services:
     restart: on-failure
     volumes:
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
-  
+
   api:
     build:
       context: ./api
@@ -130,3 +130,14 @@ services:
       - api_network
     ports:
       - '3000:3000'
+
+  socket-client:
+    build:
+      context: socket-client
+    networks:
+      - api_network
+    environment:
+      REACT_APP_HOST_SOCKET_URL: 'http://api:8080/agrotech/ws'
+      PORT: 3001
+    ports:
+      - '3001:3001'
