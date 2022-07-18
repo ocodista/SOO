@@ -60,12 +60,16 @@ function Sensor({ id, category, label, values }) {
 
 export function Sensors() {
   const sensors = useSelector(selectSensors);
+  let orderedSensors = [...sensors]
+
+  orderedSensors = orderedSensors.sort((a, b) => a.id - b.id)
+  console.log('Ordered Sensors', orderedSensors)
 
   return (
     <>
       <h1>Sensores - Estante 1</h1>
       <div class="wh-100" >
-        {sensors.map((sensor, i) => <Sensor key={i} {...sensor} />)}
+        {orderedSensors.map((sensor, i) => <Sensor key={i} {...sensor} />)}
       </div>
     </>
   );
