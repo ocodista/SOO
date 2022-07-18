@@ -63,7 +63,6 @@ export function Sensors() {
   let orderedSensors = [...sensors]
 
   orderedSensors = orderedSensors.sort((a, b) => a.id - b.id)
-  console.log('Ordered Sensors', orderedSensors)
 
   return (
     <>

@@ -42,7 +42,7 @@ const PlotLyChart = (sentAt, values, title) => {
         x: sentAt,
         y: values,
         type: 'line',
-        marker: { color: 'red' }
+        marker: { color: 'blue' }
       }
       ]}
       layout={{
