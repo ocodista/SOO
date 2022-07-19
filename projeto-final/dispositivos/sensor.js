@@ -76,7 +76,7 @@ const getDispositivo = () => {
   const sensorQueue = process.env.SENSOR_QUEUE || 'sensor_update_queue'
   const intervalSeconds = process.env.INTERVAL_SECONDS || 60
   const dispositivo = getDispositivo()
-  let value = 20.0
+  let value = process.env.START_VALUE ? parseFloat(process.env.START_VALUE) : 20.0
 
   while (true) {
     value += getRandomArbitrary(-0.3, 0.3)

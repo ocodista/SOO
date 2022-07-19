@@ -35,13 +35,14 @@ const RechartsChart = (data, title, minValue, maxValue) => {
 
 }
 
-const PlotLyChart = (sentAt, values, title) => {
+const PlotLyChart = (sentAt, values, title, category, label) => {
   return (
     <Plot
       data={[{
         x: sentAt,
         y: values,
         type: 'line',
+        name: category,
         marker: { color: 'blue' }
       }
       ]}
@@ -54,14 +55,13 @@ const PlotLyChart = (sentAt, values, title) => {
   )
 }
 
-const SensorChart = ({ data, title }) => {
+const SensorChart = ({ category, data, title }) => {
   const sentAt = data.map((item) => item.sentAt)
   const values = data.map((item) => item.value)
-
-  const minValue = values.sort((a, b) => a < b)[0]
-  const maxValue = values.sort((a, b) => a > b)
+ // const minValue = values.sort((a, b) => a < b)[0]
+ // const maxValue = values.sort((a, b) => a > b)
   // RechartsChart(data, title, minValue, maxValue)
-  return PlotLyChart(sentAt, values, title)
+  return PlotLyChart(sentAt, values, title, category)
 
 }
 

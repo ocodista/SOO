@@ -39,7 +39,7 @@ function Message({ sentAt, value, label, idx }) {
 }
 
 function Sensor({ id, category, label, values }) {
-  const name = `Sensor ${id} (${category})`
+  const name = `Sensor ${id} - ${category} (${label})`
   const chartData = values.map(({ value, sentAt }) => ({
     name,
     value,
@@ -52,7 +52,11 @@ function Sensor({ id, category, label, values }) {
 
   return (
     <section className="wh-50" style={{ paddingBottom: 20 }}>
-      <SensorChart title={name} data={chartData} />
+      <SensorChart 
+        title={name} 
+        data={chartData} 
+        category={category} 
+      />
     </section>
   )
 }
