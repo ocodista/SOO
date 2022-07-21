@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "estante")
+@Table(name = "nicho")
 public class NichoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
