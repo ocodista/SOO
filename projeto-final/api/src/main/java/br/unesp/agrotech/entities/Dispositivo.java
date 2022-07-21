@@ -10,18 +10,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "dispositivo")
-public class DispositivoEntity {
+public class Dispositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,19 +35,23 @@ public class DispositivoEntity {
     @Column(name = "value")
     private Double value;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idEstante")
-    private EstanteEntity estante;
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "estante_id")
+    private Estante estante;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idTipoDispositivo")
-    private TipoDispositivoEntity tipoDispositivo;
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "tipoDispositivo_id")
+    private TipoDispositivo tipoDispositivo;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idCategoriaDispositivo")
-    private CategoriaDispositivoEntity categoriaDispositivo;
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "categoriaDispositivo_id")
+    private CategoriaDispositivo categoriaDispositivo;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idNicho")
-    private NichoEntity nicho;
+    @ManyToOne
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "nicho_id")
+    private Nicho nicho;
 }

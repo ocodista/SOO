@@ -1,41 +1,43 @@
 package br.unesp.agrotech.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "planta")
-public class PlantaEntity {
+@Table(name = "prateleira")
+public class Prateleira {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
+    @Column(name = "posicaoVertical")
+    private int posicaoVertical;
 
-    @Column(name = "dataPlantio")
-    private int dataPlantio;
+    @ManyToOne
+    @JoinColumn(name = "estante_id")
+    private Estante estante;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idNicho")
-    private NichoEntity nicho;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idCategoriaPlanta")
-    private CategoriaPlantaEntity categoriaPlanta;
+    @OneToMany(mappedBy = "prateleira", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Nicho> nichos = new HashSet<>();
 }

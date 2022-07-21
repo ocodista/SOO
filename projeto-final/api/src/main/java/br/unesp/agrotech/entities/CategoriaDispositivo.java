@@ -10,15 +10,17 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "categoria_dispositivo")
-public class CategoriaDispositivoEntity {
+public class CategoriaDispositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

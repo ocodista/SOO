@@ -1,7 +1,7 @@
 package br.unesp.agrotech.resources.v1;
 
 import br.unesp.agrotech.dtos.CategoriaDispositivoDTO;
-import br.unesp.agrotech.entities.CategoriaDispositivoEntity;
+import br.unesp.agrotech.entities.CategoriaDispositivo;
 import br.unesp.agrotech.services.locacao.v1.CategoriaDispositivoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,20 +34,20 @@ public class CategoriaDispositivoResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de categorias de dispositivos")
     @GetMapping("/")
-    public ResponseEntity<List<CategoriaDispositivoEntity>> buscarCategoriaDispositivo() throws Exception {
-        List<CategoriaDispositivoEntity> categoriaDispositivos = categoriaDispositivoService.buscar();
+    public ResponseEntity<List<CategoriaDispositivo>> buscarCategoriaDispositivo() throws Exception {
+        List<CategoriaDispositivo> categoriaDispositivos = categoriaDispositivoService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(categoriaDispositivos);
     }
 
     @ApiOperation(value = "Este serviço atualiza uma categoria de dispositivo através do id")
     @PutMapping("/{idCategoriaDispositivo}")
-    public ResponseEntity<CategoriaDispositivoEntity> atualizarCategoriaDispositivo(
+    public ResponseEntity<CategoriaDispositivo> atualizarCategoriaDispositivo(
         @ApiParam(value = "Id do categoriaDispositivo a ser atualizada", required = true)
         @PathVariable("idCategoriaDispositivo") String idCategoriaDispositivo,
         @ApiParam(value = "Dados do categoriaDispositivo que podem ser atualizados")
         @RequestBody CategoriaDispositivoDTO categoriaDispositivoDto
     ) throws Exception {
-        CategoriaDispositivoEntity categoriaDispositivoAtualizado = categoriaDispositivoService.atualizar(Long.parseLong(idCategoriaDispositivo), categoriaDispositivoDto);
+        CategoriaDispositivo categoriaDispositivoAtualizado = categoriaDispositivoService.atualizar(Long.parseLong(idCategoriaDispositivo), categoriaDispositivoDto);
         return ResponseEntity.status(HttpStatus.OK).body(categoriaDispositivoAtualizado);
     }
 

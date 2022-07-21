@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unesp.agrotech.dtos.DispositivoDTO;
-import br.unesp.agrotech.entities.DispositivoEntity;
+import br.unesp.agrotech.entities.Dispositivo;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,20 +43,20 @@ public class DispositivoResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<DispositivoEntity>> buscarDispositivo() throws Exception {
-        List<DispositivoEntity> dispositivos = dispositivoService.buscar();
+    public ResponseEntity<List<Dispositivo>> buscarDispositivo() throws Exception {
+        List<Dispositivo> dispositivos = dispositivoService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(dispositivos);
     }
 
     @ApiOperation(value = "Este serviço atualiza um dispositivo através do id")
     @PutMapping("/{idDispositivo}")
-    public ResponseEntity<DispositivoEntity> atualizarDispositivo(
+    public ResponseEntity<Dispositivo> atualizarDispositivo(
         @ApiParam(value = "Id do dispositivo a ser atualizada", required = true)
         @PathVariable("idDispositivo") String idDispositivo,
         @ApiParam(value = "Dados do dispositivo que podem ser atualizados")
         @RequestBody DispositivoDTO dispositivoDto
     ) throws Exception {
-        DispositivoEntity dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoDto);
+        Dispositivo dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoDto);
         return ResponseEntity.status(HttpStatus.OK).body(dispositivoAtualizado);
     }
 

@@ -1,11 +1,11 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
 import br.unesp.agrotech.dtos.DispositivoDTO;
-import br.unesp.agrotech.entities.CategoriaDispositivoEntity;
-import br.unesp.agrotech.entities.DispositivoEntity;
-import br.unesp.agrotech.entities.EstanteEntity;
-import br.unesp.agrotech.entities.NichoEntity;
-import br.unesp.agrotech.entities.TipoDispositivoEntity;
+import br.unesp.agrotech.entities.CategoriaDispositivo;
+import br.unesp.agrotech.entities.Dispositivo;
+import br.unesp.agrotech.entities.Estante;
+import br.unesp.agrotech.entities.Nicho;
+import br.unesp.agrotech.entities.TipoDispositivo;
 import br.unesp.agrotech.repositories.DispositivoRepository;
 import br.unesp.agrotech.services.locacao.v1.CategoriaDispositivoService;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
@@ -17,8 +17,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, DispositivoEntity> implements DispositivoService {
-    private final static DispositivoEntity entity = new DispositivoEntity();
+public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, Dispositivo> implements DispositivoService {
+    private final static Dispositivo entity = new Dispositivo();
 
     private final EstanteService estanteService;
     private final DispositivoRepository dispositivoRepository;
@@ -43,10 +43,10 @@ public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, Disp
 
     @Override
     public void cadastrar(DispositivoDTO dispositivoDTO) throws Exception {
-        EstanteEntity estanteEntity = estanteService.buscarPorId(dispositivoDTO.getIdEstante());
-        TipoDispositivoEntity tipoDispositivoEntity = tipoDispositivoService.buscarPorId(dispositivoDTO.getIdTipoDispositivo());
-        CategoriaDispositivoEntity categoriaDispositivoEntity = categoriaDispositivoService.buscarPorId(dispositivoDTO.getIdCategoriaDispositivo());
-        NichoEntity nichoEntity = nichoService.buscarPorId(dispositivoDTO.getIdNicho());
+        Estante estanteEntity = estanteService.buscarPorId(dispositivoDTO.getIdEstante());
+        TipoDispositivo tipoDispositivoEntity = tipoDispositivoService.buscarPorId(dispositivoDTO.getIdTipoDispositivo());
+        CategoriaDispositivo categoriaDispositivoEntity = categoriaDispositivoService.buscarPorId(dispositivoDTO.getIdCategoriaDispositivo());
+        Nicho nichoEntity = nichoService.buscarPorId(dispositivoDTO.getIdNicho());
 
         entity.setCategoriaDispositivo(categoriaDispositivoEntity);
         entity.setEstante(estanteEntity);

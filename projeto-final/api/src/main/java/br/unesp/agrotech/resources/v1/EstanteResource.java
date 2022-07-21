@@ -5,7 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.unesp.agrotech.dtos.EstanteDTO;
-import br.unesp.agrotech.entities.EstanteEntity;
+import br.unesp.agrotech.entities.Estante;
+import br.unesp.agrotech.repositories.EstanteRepository;
 import br.unesp.agrotech.services.locacao.v1.EstanteService;
 
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class EstanteResource {
 
     private final EstanteService estanteService;
+    private final EstanteRepository estanteRepository;
 
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
@@ -42,22 +44,32 @@ public class EstanteResource {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @ApiOperation(value = "Este serviço cadastra novas estantes")
+    @PostMapping("/cadastro")
+    public ResponseEntity<Void> cadastrarEstanteComPrat(
+        @ApiParam(value = "Dados da estante que será cadastrada", required = true)
+        @Valid @RequestBody Estante estanteDTO
+    ) throws Exception {
+        estanteRepository.saveAndFlush(estanteDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<EstanteEntity>> buscarEstantes() throws Exception {
-        List<EstanteEntity> listEstante = estanteService.buscar();
+    public ResponseEntity<List<Estante>> buscarEstantes() throws Exception {
+        List<Estante> listEstante = estanteService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(listEstante);
     }
 
     @ApiOperation(value = "Este serviço atualiza uma estante através do id")
     @PutMapping("/{idEstante}")
-    public ResponseEntity<EstanteEntity> atualizarEstante(
+    public ResponseEntity<Estante> atualizarEstante(
         @ApiParam(value = "Id da estante a ser atualizada", required = true)
         @PathVariable("idEstante") String idEstante,
         @ApiParam(value = "Dados da estante que podem ser atualizados")
         @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        EstanteEntity estanteAtualizada = estanteService.atualizar(Long.parseLong(idEstante), estanteDTO);
+        Estante estanteAtualizada = estanteService.atualizar(Long.parseLong(idEstante), estanteDTO);
         return ResponseEntity.status(HttpStatus.OK).body(estanteAtualizada);
     }
 

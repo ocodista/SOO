@@ -8,17 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tipo_dispositivo")
-public class TipoDispositivoEntity {
+@Table(name = "categoria_planta")
+public class CategoriaPlanta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,4 +27,13 @@ public class TipoDispositivoEntity {
 
     @Column(name = "nome")
     private String nome;
+
+    @Column(name = "tipoTerra")
+    private String tipoTerra;
+
+    @Column(name = "temperaturaIdeal")
+    private Double temperaturaIdeal;
+
+    @Column(name = "consumoAguaPorDia")
+    private Double consumoAguaPorDia;
 }
