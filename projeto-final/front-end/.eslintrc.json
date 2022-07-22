@@ -4,6 +4,13 @@
       "es2021": true,
       "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
   "extends": [
       "plugin:react/recommended",
       "next",
@@ -22,5 +29,6 @@
       "@typescript-eslint"
   ],
   "rules": {
+    "no-use-before-define": "off"
   }
 }

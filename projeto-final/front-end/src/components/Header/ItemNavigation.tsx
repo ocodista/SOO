@@ -1,4 +1,5 @@
 import { Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 type ItemNavigationProps = {
   text: string,
@@ -6,6 +7,7 @@ type ItemNavigationProps = {
 }
 
 export function ItemNavigation ({ text, redirect }: ItemNavigationProps) {
+  const { pathname } = useRouter()
   return (
     <Text
       as="a"
@@ -15,9 +17,10 @@ export function ItemNavigation ({ text, redirect }: ItemNavigationProps) {
       height="100%"
       fontSize={20}
       fontWeight="medium"
-      color="yellow.800"
       padding="16px"
       borderRadius="8px"
+      bg={pathname === redirect ? 'yellow.800' : 'unset'}
+      color={pathname === redirect ? 'white' : 'yellow.800'}
       _hover={{
         backgroundColor: 'yellow.800',
         color: 'white'

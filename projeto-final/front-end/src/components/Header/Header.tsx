@@ -7,12 +7,9 @@ export function Header () {
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      paddingX="16px"
-      paddingY="32px"
       position="sticky"
     >
       <Logo />
-
       <Navigation />
     </Flex>
   )
