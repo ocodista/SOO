@@ -20,14 +20,14 @@ export const NichosMock: NichoType[] = [
   {
     id: 1,
     idPrateleira: 1,
-    posicaoHorizontal: 0,
+    posicaoHorizontal: 1,
     dispositivos: [],
     plantas: []
   },
   {
     id: 1,
     idPrateleira: 1,
-    posicaoHorizontal: 0,
+    posicaoHorizontal: 2,
     dispositivos: [],
     plantas: []
   }
