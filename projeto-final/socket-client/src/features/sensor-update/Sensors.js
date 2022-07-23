@@ -1,29 +1,80 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import {
-  selectSensors,
-} from './sensorsSlice';
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectSensors } from "./sensorsSlice";
+import SensorChart from "../sensor-chart/SensorChart";
 
+const leadingZero = (str) => (str.toString().length === 1 ? `0${str}` : str);
 
-function Sensor({ id, category, label, values }) {
-  const renderMessage = (value, idx) => (<div key={idx}>{value} {label}</div>)
+const formattedTime = (dateStr) => {
+    let d = dateStr;
+    if (typeof dateStr !== typeof Date) {
+        d = new Date(dateStr);
+    }
 
-  return (
-    <div>
-      <h2>Sensor {id} ({category})</h2>
-      {values.map((value, idx) => renderMessage(value, `${id}_${idx}`))}
-    </div>
-  )
+    let hours = leadingZero(d.getHours());
+    let minutes = leadingZero(d.getMinutes());
+    let seconds = leadingZero(d.getSeconds());
+    return `${hours}:${minutes}:${seconds}`;
+};
+
+const formattedDate = (dateStr) => {
+    const d = new Date(dateStr);
+
+    let day = leadingZero(d.getDate());
+    let month = leadingZero(d.getMonth());
+    let year = leadingZero(d.getFullYear());
+    let hours = leadingZero(d.getHours());
+    let minutes = leadingZero(d.getMinutes());
+    let seconds = leadingZero(d.getSeconds());
+
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+};
+
+function Message({ sentAt, value, label, idx }) {
+    return (
+        <div key={idx}>
+            [{formattedDate(sentAt)}] {value} {label}
+        </div>
+    );
 }
 
+function Sensor({ id, category, label, values }) {
+    const name = `Sensor ${id} - ${category} (${label})`;
+    const chartData = values.map(({ value, sentAt }) => ({
+        name,
+        value,
+        sentAt: formattedTime(sentAt),
+    }));
+
+    const renderValues = () =>
+        values.map((value, idx) => (
+            <Message {...value} label={label} idx={idx} />
+        ));
+
+    return (
+        <section className="wh-50" style={{ paddingBottom: 20 }}>
+            <SensorChart title={name} data={chartData} category={category} />
+        </section>
+    );
+}
 
 export function Sensors() {
-  const sensors = useSelector(selectSensors);
+    const sensors = useSelector(selectSensors);
+    let orderedSensors = [...sensors];
 
-  return (
-    <div>
-      <h1>Sensores</h1>
-      {sensors.map((sensor, i) => <Sensor {...sensor} />)}
-    </div>
-  );
+    orderedSensors = orderedSensors.sort((a, b) => a.id - b.id);
+
+    const renderSensors = () => {
+        if (!sensors.length) return <h2>Nenhum dado foi encontrado...</h2>;
+        return orderedSensors.map((sensor, i) => (
+            <Sensor key={i} {...sensor} />
+        ));
+    };
+
+    return (
+        <>
+            <h1>Sensores</h1>
+            <div class="wh-100">{renderSensors()}</div>
+        </>
+    );
 }
