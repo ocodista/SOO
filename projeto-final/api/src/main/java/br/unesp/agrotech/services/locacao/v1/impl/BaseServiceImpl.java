@@ -1,5 +1,6 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,16 +13,19 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
-
     private final ModelMapper modelMapper;
     private final JpaRepository<E, Long> repository;
     private final E entity;
 
     @Override
-    public void cadastrar(DTO dto) throws Exception {
+    public Long cadastrar(DTO dto) throws Exception {
         modelMapper.map(dto, entity);
         try {
-            repository.save(entity);
+            Object x = repository.saveAndFlush(entity);
+            Field fieldId = x.getClass().getDeclaredField("id");
+            fieldId.setAccessible(true);
+            Long id = (Long) fieldId.get(x);
+            return id;
         } catch(Exception exception) {
             throw new Exception("Erro ao salvar dados", exception);
         }

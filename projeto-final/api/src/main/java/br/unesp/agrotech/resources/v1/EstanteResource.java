@@ -8,6 +8,9 @@ import br.unesp.agrotech.dtos.EstanteDTO;
 import br.unesp.agrotech.entities.EstanteEntity;
 import br.unesp.agrotech.services.locacao.v1.EstanteService;
 
+import br.unesp.agrotech.utils.RabbitConsumer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/estante")
 @RequiredArgsConstructor
 public class EstanteResource {
+    private static Logger logger = LogManager.getLogger(EstanteResource.class.toString());
 
     private final EstanteService estanteService;
 
@@ -38,7 +42,7 @@ public class EstanteResource {
         @ApiParam(value = "Dados da estante que será cadastrada", required = true)
         @Valid @RequestBody EstanteDTO estanteDTO
     ) throws Exception {
-        estanteService.cadastrar(estanteDTO);
+        Long id = estanteService.cadastrar(estanteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
