@@ -1,17 +1,12 @@
 import {
+  Button,
   Flex,
   Grid,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr
+  Text
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
-import { Header } from '../components/Header/Header'
+import { Header } from '../components/Header'
+import { ShelfTable } from '../components/Shelf/ShelfTable'
 import { ShelfService } from '../services/ShelfService'
 import { EstanteType } from '../services/types'
 
@@ -20,7 +15,10 @@ interface IEstantes {
 }
 
 const Estantes: NextPage = ({ estantes }: IEstantes) => {
-  console.log(estantes)
+  if (!estantes) {
+    return null
+  }
+
   return (
     <Grid
       templateAreas={`
@@ -41,44 +39,23 @@ const Estantes: NextPage = ({ estantes }: IEstantes) => {
         padding="1rem"
         direction="column"
         alignItems="center"
+        justifyContent="space-between"
       >
         {estantes
-          ? (
-          <TableContainer w="100%">
-            <Table size="lg" variant="striped" colorScheme="yellow">
-              <Thead>
-                <Tr>
-                  <Th>Descrição</Th>
-                  <Th isNumeric>Sensores</Th>
-                  <Th isNumeric>Atuadores</Th>
-                  <Th isNumeric>Total de Nichos</Th>
-                  <Th isNumeric>Disponíveis</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {estantes.map((estante) => (
-                  <Tr key={estante.id}>
-                    <Td>{estante.descricao}</Td>
-                    <Td isNumeric>{estante.prateleiras.length}</Td>
-                    <Td isNumeric>{estante.qtdNichosPorPrateleira}</Td>
-                    <Td isNumeric>{estante.qtdPrateleiras}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
-            )
-          : (
-              <Text>Não há estantes</Text>
-            )}
+          ? (<ShelfTable estantes={estantes}/>)
+          : (<Text>Não há estantes</Text>)}
+        <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">
+          <Button size="lg" bgColor="yellow.800" color="white" _hover={{ bgColor: 'green.600' }}>
+            <Text>Adicionar estante</Text>
+          </Button>
+        </Flex>
       </Flex>
     </Grid>
   )
 }
 export default Estantes
 
-Estantes.getInitialProps = async (context) => {
+Estantes.getInitialProps = async () => {
   const estantes = await ShelfService.getAllShelfs()
-  console.log(estantes)
   return { estantes }
 }

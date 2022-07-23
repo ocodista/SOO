@@ -1,28 +1,15 @@
 import { Divider, Flex, GridItem, Stack, Text } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../store'
 
 export function ResumeShelf () {
   const { current } = useSelector(({ estante }: AppState) => estante)
-  const [resume, setResume] = useState({
-    totalSensores: 0,
-    totalAtuadores: 0,
-    nichosOcupados: 0,
-    nichosLivres: 0
-  })
-
-  useEffect(() => {
-    if (current) {
-      calcularResumo()
-    }
-  }, [current])
 
   if (current === null) {
     return null
   }
 
-  const calcularResumo = () => {
+  const renderDetalhes = () => {
     let totalSensores = 0
     let totalAtuadores = 0
     let nichosOcupados = 0
@@ -46,7 +33,14 @@ export function ResumeShelf () {
       })
     })
 
-    setResume({ nichosLivres, nichosOcupados, totalAtuadores, totalSensores })
+    return (
+      <Stack spacing={3} >
+          <Text>Total de sensores: {totalSensores}</Text>
+          <Text>Total de atuadores: {totalAtuadores}</Text>
+          <Text>Nichos ocupados: {nichosOcupados}</Text>
+          <Text>Nichos livres: {nichosLivres}</Text>
+        </Stack>
+    )
   }
 
   return (
@@ -62,12 +56,7 @@ export function ResumeShelf () {
         </Text>
 
         <Divider borderColor="green.600" orientation="horizontal" />
-        <Stack spacing={3} >
-          <Text>Total de sensores: {resume.totalSensores}</Text>
-          <Text>Total de atuadores: {resume.totalAtuadores}</Text>
-          <Text>Nichos ocupados: {resume.nichosOcupados}</Text>
-          <Text>Nichos livres: {resume.nichosLivres}</Text>
-        </Stack>
+        {renderDetalhes()}
 
       </Flex>
     </GridItem>

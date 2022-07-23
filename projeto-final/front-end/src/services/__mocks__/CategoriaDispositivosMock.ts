@@ -15,5 +15,15 @@ export const CategoriaDispositivoMock: CategoriaDispositivoType[] = [
     id: 3,
     medida: 'ºC',
     nome: 'Temperatura'
+  },
+  {
+    id: 4,
+    medida: '',
+    nome: 'Lâmpada'
+  },
+  {
+    id: 5,
+    medida: '',
+    nome: 'Torneira'
   }
 ]

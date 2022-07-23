@@ -8,8 +8,6 @@ import { NicheDetail } from './NicheDetail'
 export function NicheArea () {
   const { current } = useSelector(({ estante }: AppState) => estante)
   const [prateleiras, setPrateleiras] = useState<any[][]>([[]])
-  console.log(current)
-
   useEffect(() => {
     if (current) {
       setPrateleiras(parseNicheList2(current))
@@ -19,8 +17,8 @@ export function NicheArea () {
   const parseNicheList2 = useCallback((estante: EstanteType) => {
     const newEstante: any[][] = new Array(estante.qtdPrateleiras).fill(0).map(_ => new Array(estante.qtdNichosPorPrateleira).fill(null))
 
-    estante.prateleiras.forEach((prateleira, index) => {
-      prateleira.nichos.forEach((nicho, index) => {
+    estante.prateleiras.forEach((prateleira) => {
+      prateleira.nichos.forEach((nicho) => {
         const x = prateleira.posicaoVertical
         const y = nicho.posicaoHorizontal
 
@@ -55,11 +53,11 @@ export function NicheArea () {
               key={nicho.id}
               as={Flex}
               flexDirection="column"
-              gap="8px"
-              borderRadius="8px"
+              gap="0.5rem"
+              borderRadius="0.5rem"
               bg="yellow.800"
               opacity="0.7"
-              padding="8px"
+              padding="1.5rem"
             >
               <NicheDetail
                 nicheId={nicho.id}

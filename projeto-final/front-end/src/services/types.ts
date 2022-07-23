@@ -18,7 +18,8 @@ export type TipoDispositivoType = {
 
 export type DispositivoType = {
   id: number,
-  categoriaDispositivo?: CategoriaDispositivoType,
+  idEstante?: number;
+  categoriaDispositivo: CategoriaDispositivoType,
   tipoDispositivo: TipoDispositivoType,
   value: number,
   idNicho: number,

@@ -2,7 +2,7 @@ import { ShelfService } from '../services/ShelfService'
 import type { NextPage } from 'next'
 import type { EstanteType } from '../services/types'
 import { Grid, GridItem } from '@chakra-ui/react'
-import { Header } from '../components/Header/Header'
+import { Header } from '../components/Header'
 import { NicheArea } from '../components/Niche/NicheArea'
 import { Shelf } from '../components/Shelf'
 import { ResumeShelf } from '../components/Shelf/ResumeShelf'
@@ -18,7 +18,7 @@ const Home: NextPage = ({ estantes = [] }: IHome) => {
         "header header"
         "main nav1"
         "main nav2"
-        "footer nav2"
+        "main nav2"
       `}
       templateRows="2fr 6fr 2fr 3fr"
       templateColumns="9fr 3fr"
@@ -33,10 +33,7 @@ const Home: NextPage = ({ estantes = [] }: IHome) => {
         <NicheArea />
       </GridItem>
 
-        <Shelf estantes={estantes} />
-      <GridItem area="footer" bg='blue.300'>
-        Footer
-      </GridItem>
+      <Shelf estantes={estantes} />
       <ResumeShelf />
     </Grid>
   )
