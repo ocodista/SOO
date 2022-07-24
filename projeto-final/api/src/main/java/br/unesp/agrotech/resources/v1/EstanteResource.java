@@ -5,7 +5,6 @@ import java.util.*;
 import javax.validation.Valid;
 
 import br.unesp.agrotech.dtos.*;
-import br.unesp.agrotech.entities.Estante;
 import br.unesp.agrotech.entities.EstanteEntity;
 import br.unesp.agrotech.entities.PrateleiraEntity;
 import br.unesp.agrotech.services.locacao.v1.EstanteService;
