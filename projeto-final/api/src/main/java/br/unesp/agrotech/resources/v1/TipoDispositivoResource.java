@@ -1,7 +1,7 @@
 package br.unesp.agrotech.resources.v1;
 
 import br.unesp.agrotech.dtos.TipoDispositivoDTO;
-import br.unesp.agrotech.entities.TipoDispositivo;
+import br.unesp.agrotech.entities.TipoDispositivoEntity;
 import br.unesp.agrotech.services.locacao.v1.TipoDispositivoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,20 +34,20 @@ public class TipoDispositivoResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de tipos de dispositivos")
     @GetMapping("/")
-    public ResponseEntity<List<TipoDispositivo>> buscarTipoDispositivo() throws Exception {
-        List<TipoDispositivo> tipoDispositivos = tipoDispositivoService.buscar();
+    public ResponseEntity<List<TipoDispositivoEntity>> buscarTipoDispositivo() throws Exception {
+        List<TipoDispositivoEntity> tipoDispositivos = tipoDispositivoService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(tipoDispositivos);
     }
 
     @ApiOperation(value = "Este serviço atualiza um tipoDispositivo através do id")
     @PutMapping("/{idTipoDispositivo}")
-    public ResponseEntity<TipoDispositivo> atualizarTipoDispositivo(
+    public ResponseEntity<TipoDispositivoEntity> atualizarTipoDispositivo(
         @ApiParam(value = "Id do tipoDispositivo a ser atualizado", required = true)
         @PathVariable("idTipoDispositivo") String idTipoDispositivo,
         @ApiParam(value = "Dados do tipoDispositivo que podem ser atualizados")
         @RequestBody TipoDispositivoDTO tipoDispositivoDto
     ) throws Exception {
-        TipoDispositivo tipoDispositivoAtualizado = tipoDispositivoService.atualizar(Long.parseLong(idTipoDispositivo), tipoDispositivoDto);
+        TipoDispositivoEntity tipoDispositivoAtualizado = tipoDispositivoService.atualizar(Long.parseLong(idTipoDispositivo), tipoDispositivoDto);
         return ResponseEntity.status(HttpStatus.OK).body(tipoDispositivoAtualizado);
     }
 

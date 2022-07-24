@@ -1,20 +1,18 @@
 package br.unesp.agrotech.dtos;
 
-import java.util.List;
-
-import br.unesp.agrotech.entities.Nicho;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+import java.util.Set;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrateleiraDTO {
+    private Long id;
     private int posicaoVertical;
     private Long idEstante;
-    private List<NichoDTO> nichos;
+
+    private Set<NichoDTO> nichos;
 }

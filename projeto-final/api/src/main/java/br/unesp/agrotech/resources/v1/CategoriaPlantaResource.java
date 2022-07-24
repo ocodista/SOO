@@ -1,7 +1,7 @@
 package br.unesp.agrotech.resources.v1;
 
 import br.unesp.agrotech.dtos.CategoriaPlantaDTO;
-import br.unesp.agrotech.entities.CategoriaPlanta;
+import br.unesp.agrotech.entities.CategoriaPlantaEntity;
 import br.unesp.agrotech.services.locacao.v1.CategoriaPlantaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,20 +34,20 @@ public class CategoriaPlantaResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de categorias de plantas")
     @GetMapping("/")
-    public ResponseEntity<List<CategoriaPlanta>> buscarCategoriaPlanta() throws Exception {
-        List<CategoriaPlanta> categoriaPlantas = categoriaPlantaService.buscar();
+    public ResponseEntity<List<CategoriaPlantaEntity>> buscarCategoriaPlanta() throws Exception {
+        List<CategoriaPlantaEntity> categoriaPlantas = categoriaPlantaService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(categoriaPlantas);
     }
 
     @ApiOperation(value = "Este serviço atualiza uma categoria de planta através do id")
     @PutMapping("/{idCategoriaPlanta}")
-    public ResponseEntity<CategoriaPlanta> atualizarCategoriaPlanta(
+    public ResponseEntity<CategoriaPlantaEntity> atualizarCategoriaPlanta(
         @ApiParam(value = "Id da categoriaPlanta a ser atualizada", required = true)
         @PathVariable("idCategoriaPlanta") String idCategoriaPlanta,
         @ApiParam(value = "Dados do categoriaPlanta que podem ser atualizados")
         @RequestBody CategoriaPlantaDTO categoriaPlantaDto
     ) throws Exception {
-        CategoriaPlanta categoriaPlantaAtualizado = categoriaPlantaService.atualizar(Long.parseLong(idCategoriaPlanta), categoriaPlantaDto);
+        CategoriaPlantaEntity categoriaPlantaAtualizado = categoriaPlantaService.atualizar(Long.parseLong(idCategoriaPlanta), categoriaPlantaDto);
         return ResponseEntity.status(HttpStatus.OK).body(categoriaPlantaAtualizado);
     }
 

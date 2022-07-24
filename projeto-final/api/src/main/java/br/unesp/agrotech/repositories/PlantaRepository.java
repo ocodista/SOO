@@ -1,7 +1,7 @@
 package br.unesp.agrotech.repositories;
 
-import br.unesp.agrotech.entities.Planta;
+import br.unesp.agrotech.entities.PlantaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlantaRepository extends JpaRepository<Planta, Long> {
+public interface PlantaRepository extends JpaRepository<PlantaEntity, Long> {
 }

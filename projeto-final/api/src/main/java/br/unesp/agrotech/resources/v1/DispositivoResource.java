@@ -1,9 +1,14 @@
 package br.unesp.agrotech.resources.v1;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import br.unesp.agrotech.dtos.GetDispositivoDTO;
+import br.unesp.agrotech.dtos.PrateleiraDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.unesp.agrotech.dtos.DispositivoDTO;
-import br.unesp.agrotech.entities.Dispositivo;
+import br.unesp.agrotech.dtos.CreateDispositivoDTO;
+import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,33 +35,37 @@ import lombok.RequiredArgsConstructor;
 public class DispositivoResource {
 
     private final DispositivoService dispositivoService;
+    private final ModelMapper modelMapper;
 
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
     public ResponseEntity<Void> cadastrarDispositivo(
         @ApiParam(value = "Dados da estante que será cadastrada", required = true)
-        @Valid @RequestBody DispositivoDTO dispositivoDto
+        @Valid @RequestBody CreateDispositivoDTO createDispositivoDto
     ) throws Exception {
-        dispositivoService.cadastrar(dispositivoDto);
+        dispositivoService.cadastrar(createDispositivoDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<Dispositivo>> buscarDispositivo() throws Exception {
-        List<Dispositivo> dispositivos = dispositivoService.buscar();
-        return ResponseEntity.status(HttpStatus.OK).body(dispositivos);
+    public ResponseEntity<List<GetDispositivoDTO>> buscarDispositivo() throws Exception {
+        List<DispositivoEntity> entities = dispositivoService.buscar();
+        List<GetDispositivoDTO> mappedDispositivos = Arrays.asList(modelMapper.map(entities, GetDispositivoDTO[].class));
+        modelMapper.map(entities, mappedDispositivos);
+
+        return ResponseEntity.status(HttpStatus.OK).body(mappedDispositivos);
     }
 
     @ApiOperation(value = "Este serviço atualiza um dispositivo através do id")
     @PutMapping("/{idDispositivo}")
-    public ResponseEntity<Dispositivo> atualizarDispositivo(
+    public ResponseEntity<DispositivoEntity> atualizarDispositivo(
         @ApiParam(value = "Id do dispositivo a ser atualizada", required = true)
         @PathVariable("idDispositivo") String idDispositivo,
         @ApiParam(value = "Dados do dispositivo que podem ser atualizados")
-        @RequestBody DispositivoDTO dispositivoDto
+        @RequestBody CreateDispositivoDTO createDispositivoDto
     ) throws Exception {
-        Dispositivo dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoDto);
+        DispositivoEntity dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), createDispositivoDto);
         return ResponseEntity.status(HttpStatus.OK).body(dispositivoAtualizado);
     }
 

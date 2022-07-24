@@ -1,7 +1,7 @@
 package br.unesp.agrotech.resources.v1;
 
 import br.unesp.agrotech.dtos.PlantaDTO;
-import br.unesp.agrotech.entities.Planta;
+import br.unesp.agrotech.entities.PlantaEntity;
 import br.unesp.agrotech.services.locacao.v1.PlantaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,20 +34,20 @@ public class PlantaResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de plantas")
     @GetMapping("/")
-    public ResponseEntity<List<Planta>> buscarPlanta() throws Exception {
-        List<Planta> plantas = plantaService.buscar();
+    public ResponseEntity<List<PlantaEntity>> buscarPlanta() throws Exception {
+        List<PlantaEntity> plantas = plantaService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(plantas);
     }
 
     @ApiOperation(value = "Este serviço atualiza uma planta através do id")
     @PutMapping("/{idPlanta}")
-    public ResponseEntity<Planta> atualizarPlanta(
+    public ResponseEntity<PlantaEntity> atualizarPlanta(
         @ApiParam(value = "Id da planta a ser atualizada", required = true)
         @PathVariable("idPlanta") String idPlanta,
         @ApiParam(value = "Dados da planta que podem ser atualizados")
         @RequestBody PlantaDTO plantaDto
     ) throws Exception {
-        Planta plantaAtualizado = plantaService.atualizar(Long.parseLong(idPlanta), plantaDto);
+        PlantaEntity plantaAtualizado = plantaService.atualizar(Long.parseLong(idPlanta), plantaDto);
         return ResponseEntity.status(HttpStatus.OK).body(plantaAtualizado);
     }
 

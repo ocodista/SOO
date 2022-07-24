@@ -1,7 +1,7 @@
 package br.unesp.agrotech.resources.v1;
 
 import br.unesp.agrotech.dtos.PrateleiraDTO;
-import br.unesp.agrotech.entities.Prateleira;
+import br.unesp.agrotech.entities.PrateleiraEntity;
 import br.unesp.agrotech.services.locacao.v1.PrateleiraService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,20 +34,20 @@ public class PrateleiraResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de prateleiras")
     @GetMapping("/")
-    public ResponseEntity<List<Prateleira>> buscarPrateleira() throws Exception {
-        List<Prateleira> prateleiras = prateleiraService.buscar();
+    public ResponseEntity<List<PrateleiraEntity>> buscarPrateleira() throws Exception {
+        List<PrateleiraEntity> prateleiras = prateleiraService.buscar();
         return ResponseEntity.status(HttpStatus.OK).body(prateleiras);
     }
 
     @ApiOperation(value = "Este serviço atualiza uma prateleira através do id")
     @PutMapping("/{idPrateleira}")
-    public ResponseEntity<Prateleira> atualizarPrateleira(
+    public ResponseEntity<PrateleiraEntity> atualizarPrateleira(
         @ApiParam(value = "Id da prateleira a ser atualizada", required = true)
         @PathVariable("idPrateleira") String idPrateleira,
         @ApiParam(value = "Dados da prateleira que podem ser atualizados")
         @RequestBody PrateleiraDTO prateleiraDto
     ) throws Exception {
-        Prateleira prateleiraAtualizado = prateleiraService.atualizar(Long.parseLong(idPrateleira), prateleiraDto);
+        PrateleiraEntity prateleiraAtualizado = prateleiraService.atualizar(Long.parseLong(idPrateleira), prateleiraDto);
         return ResponseEntity.status(HttpStatus.OK).body(prateleiraAtualizado);
     }
 

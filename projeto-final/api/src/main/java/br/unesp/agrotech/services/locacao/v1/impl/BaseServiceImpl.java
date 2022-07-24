@@ -1,10 +1,13 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import br.unesp.agrotech.services.locacao.v1.BaseService;
@@ -12,16 +15,20 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
-
     private final ModelMapper modelMapper;
-    private final JpaRepository<E, Long> repository;
-    private final E entity;
+    protected final JpaRepository<E, Long> repository;
+    protected E entity;
 
     @Override
-    public void cadastrar(DTO dto) throws Exception {
+    public Long cadastrar(DTO dto) throws Exception {
+        entity = (E) entity.getClass().getDeclaredConstructor().newInstance();
         modelMapper.map(dto, entity);
         try {
-            repository.save(entity);
+            Object createdEntity = repository.saveAndFlush(entity);
+            Field fieldId = createdEntity.getClass().getDeclaredField("id");
+            fieldId.setAccessible(true);
+            Long id = (Long) fieldId.get(createdEntity);
+            return id;
         } catch(Exception exception) {
             throw new Exception("Erro ao salvar dados", exception);
         }
@@ -36,6 +43,7 @@ public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public E buscarPorId(Long id) throws Exception {
         Assert.notNull(id, "O id é obrigatório");
@@ -46,7 +54,16 @@ public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
         return findedEntity.get();
     }
 
-    @Override
+    @Transactional(readOnly = true)
+    public List<E> buscarPorIds(List<Long> ids) throws Exception {
+        Assert.notEmpty(ids, "Ids são obrigatórios");
+        List<E> entities = repository.findAllById(ids);
+        if (entities.size() == 0) {
+            throw new Exception("Não há dados com o id informado");
+        }
+        return entities;
+    }
+
     public E atualizar(Long id, DTO dto) throws Exception {
         try {
             Assert.notNull(id, "O identificador é obrigatório");
