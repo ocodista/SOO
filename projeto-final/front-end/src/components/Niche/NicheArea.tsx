@@ -7,7 +7,6 @@ import { NicheDetail } from './NicheDetail'
 
 export function NicheArea () {
   const { current } = useSelector(({ estante }: AppState) => estante)
-  console.log('[NicheArea] current', current)
   const [prateleiras, setPrateleiras] = useState<any[][]>([[]])
   useEffect(() => {
     if (current) {

@@ -4,7 +4,6 @@ import { AppState } from '../../store'
 
 export function ResumeShelf () {
   const { current } = useSelector(({ estante }: AppState) => estante)
-  console.log('[ResumeShelf] current', current)
 
   if (current === null) {
     return null

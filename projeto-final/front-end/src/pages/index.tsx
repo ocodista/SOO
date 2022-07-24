@@ -16,7 +16,6 @@ interface IHome {
 }
 
 const Home: NextPage = ({ estantes }: IHome) => {
-  console.log('[Home] estantes', estantes)
   const { estantes: estantesState } = useSelector(({ estante }: AppState) => estante)
   const dispatch = useDispatch()
   useEffect(() => {

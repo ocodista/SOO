@@ -8,7 +8,6 @@ type DeviceTableProps = {
 
 export function DeviceTable ({ dispositivos }: DeviceTableProps) {
   const renderDetalhes = (tipo: string) => {
-    console.log(dispositivos)
     return dispositivos.map((dispositivo) => {
       if (dispositivo.tipoDispositivo.nome.toLowerCase() === tipo) {
         return (

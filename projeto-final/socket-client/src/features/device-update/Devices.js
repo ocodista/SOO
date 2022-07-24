@@ -69,7 +69,7 @@ export function Devices() {
 
     return (
         <>
-            <h1>Devicees</h1>
+            <h1>Dispositivos</h1>
             <div class="wh-100">{renderDevices()}</div>
         </>
     );

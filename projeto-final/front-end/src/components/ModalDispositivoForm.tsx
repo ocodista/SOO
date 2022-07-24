@@ -29,7 +29,7 @@ export function ModalDispositivoForm () {
   }, [])
 
   const salvar = () => {
-    console.log({
+    console.log('Salvando dispositivo...', {
       idCategoriaDispositivo,
       idNicho,
       idTipoDispositivo,
