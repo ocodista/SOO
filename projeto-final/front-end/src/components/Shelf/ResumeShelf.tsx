@@ -4,6 +4,7 @@ import { AppState } from '../../store'
 
 export function ResumeShelf () {
   const { current } = useSelector(({ estante }: AppState) => estante)
+  console.log('[ResumeShelf] current', current)
 
   if (current === null) {
     return null
@@ -25,7 +26,7 @@ export function ResumeShelf () {
             totalAtuadores += 1
           }
         })
-        if (nicho.plantas.length !== 0) {
+        if (nicho?.dispositivos?.length !== 0) {
           nichosOcupados += 1
         } else {
           nichosLivres += 1

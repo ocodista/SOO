@@ -6,12 +6,26 @@ import { Header } from '../components/Header'
 import { NicheArea } from '../components/Niche/NicheArea'
 import { Shelf } from '../components/Shelf'
 import { ResumeShelf } from '../components/Shelf/ResumeShelf'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchEstanteRequest, fetchEstanteSuccess, setCurrentEstante } from '../store/estante/actions'
+import { AppState } from '../store'
 
 interface IHome {
   estantes ?: EstanteType[]
 }
 
-const Home: NextPage = ({ estantes = [] }: IHome) => {
+const Home: NextPage = ({ estantes }: IHome) => {
+  console.log('[Home] estantes', estantes)
+  const { estantes: estantesState } = useSelector(({ estante }: AppState) => estante)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchEstanteRequest())
+    if (estantes) {
+      dispatch(fetchEstanteSuccess({ estantes }))
+      dispatch(setCurrentEstante({ estante: estantes[0] }))
+    }
+  }, [estantes])
   return (
     <Grid
       templateAreas={`
@@ -33,7 +47,7 @@ const Home: NextPage = ({ estantes = [] }: IHome) => {
         <NicheArea />
       </GridItem>
 
-      <Shelf estantes={estantes} />
+      <Shelf estantes={estantesState} />
       <ResumeShelf />
     </Grid>
   )

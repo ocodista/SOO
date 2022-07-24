@@ -5,6 +5,20 @@ export type EstanteType = {
   descricao: string,
   prateleiras: PrateleiraType[]
 }
+
+export type CadastroEstanteType = {
+  descricao: string,
+  qtdNichosPorPrateleira: number,
+  qtdPrateleiras: number
+}
+
+export type CadastroDispositivoType = {
+  idCategoriaDispositivo: number,
+  idNicho: number,
+  idTipoDispositivo: number,
+  value: number
+}
+
 export type CategoriaDispositivoType = {
   id: number,
   medida: string,

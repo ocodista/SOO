@@ -1,11 +1,11 @@
 import {
-  Button,
   Flex,
   Grid,
   Text
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { Header } from '../components/Header'
+import { ModalEstanteForm } from '../components/ModalEstanteForm'
 import { ShelfTable } from '../components/Shelf/ShelfTable'
 import { ShelfService } from '../services/ShelfService'
 import { EstanteType } from '../services/types'
@@ -45,9 +45,7 @@ const Estantes: NextPage = ({ estantes }: IEstantes) => {
           ? (<ShelfTable estantes={estantes}/>)
           : (<Text>Não há estantes</Text>)}
         <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">
-          <Button size="lg" bgColor="yellow.800" color="white" _hover={{ bgColor: 'green.600' }}>
-            <Text>Adicionar estante</Text>
-          </Button>
+          <ModalEstanteForm />
         </Flex>
       </Flex>
     </Grid>

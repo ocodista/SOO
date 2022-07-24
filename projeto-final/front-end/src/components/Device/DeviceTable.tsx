@@ -1,5 +1,6 @@
-import { Button, Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { DispositivoType } from '../../services/types'
+import { ModalDispositivoForm } from '../ModalDispositivoForm'
 
 type DeviceTableProps = {
   dispositivos: DispositivoType[]
@@ -25,7 +26,7 @@ export function DeviceTable ({ dispositivos }: DeviceTableProps) {
   }
 
   return (
-    <>
+    <Flex direction="column" width="100%" gap="2rem">
       <Flex
         border="1px solid"
         borderColor="gray.300"
@@ -50,11 +51,6 @@ export function DeviceTable ({ dispositivos }: DeviceTableProps) {
             </Tbody>
           </Table>
         </TableContainer>
-        <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">
-          <Button size="lg" bgColor="yellow.800" color="white" _hover={{ bgColor: 'green.600' }}>
-            <Text>Adicionar Sensor</Text>
-          </Button>
-        </Flex>
       </Flex>
       <Flex
         border="1px solid"
@@ -80,12 +76,10 @@ export function DeviceTable ({ dispositivos }: DeviceTableProps) {
             </Tbody>
           </Table>
         </TableContainer>
-        <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">
-          <Button size="lg" bgColor="yellow.800" color="white" _hover={{ bgColor: 'green.600' }}>
-            <Text>Adicionar Atuador</Text>
-          </Button>
-        </Flex>
       </Flex>
-    </>
+      <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">
+        <ModalDispositivoForm />
+      </Flex>
+    </Flex>
   )
 }

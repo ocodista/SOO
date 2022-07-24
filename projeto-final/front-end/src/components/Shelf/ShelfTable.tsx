@@ -23,7 +23,7 @@ export function ShelfTable ({ estantes }: ShelfTableProps) {
             totalAtuadores += 1
           }
         })
-        if (!nicho.plantas.length) {
+        if (!nicho.dispositivos.length) {
           totalDisponiveis += 1
         }
       })

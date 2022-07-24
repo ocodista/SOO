@@ -7,14 +7,15 @@ import { NicheDetail } from './NicheDetail'
 
 export function NicheArea () {
   const { current } = useSelector(({ estante }: AppState) => estante)
+  console.log('[NicheArea] current', current)
   const [prateleiras, setPrateleiras] = useState<any[][]>([[]])
   useEffect(() => {
     if (current) {
-      setPrateleiras(parseNicheList2(current))
+      setPrateleiras(parseNicheList(current))
     }
   }, [current])
 
-  const parseNicheList2 = useCallback((estante: EstanteType) => {
+  const parseNicheList = useCallback((estante: EstanteType) => {
     const newEstante: any[][] = new Array(estante.qtdPrateleiras).fill(0).map(_ => new Array(estante.qtdNichosPorPrateleira).fill(null))
 
     estante.prateleiras.forEach((prateleira) => {
@@ -22,7 +23,7 @@ export function NicheArea () {
         const x = prateleira.posicaoVertical
         const y = nicho.posicaoHorizontal
 
-        if (nicho.plantas.length) {
+        if (nicho?.dispositivos?.length) {
           newEstante[x][y] = {
             id: nicho.id,
             dispositivos: [...nicho.dispositivos],
