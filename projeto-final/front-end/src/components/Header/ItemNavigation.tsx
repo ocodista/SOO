@@ -3,15 +3,17 @@ import { useRouter } from 'next/router'
 
 type ItemNavigationProps = {
   text: string,
+  newPage: boolean,
   redirect: string
 }
 
-export function ItemNavigation ({ text, redirect }: ItemNavigationProps) {
+export function ItemNavigation ({ text, redirect, newPage = false }: ItemNavigationProps) {
   const { pathname } = useRouter()
   return (
     <Text
       as="a"
       href={redirect}
+      target={newPage ? '_blank' : '_self'}
       display="flex"
       alignItems="center"
       height="100%"
