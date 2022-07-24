@@ -1,20 +1,14 @@
 package br.unesp.agrotech.entities;
 
-import java.util.List;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @Builder
@@ -31,9 +25,13 @@ public class NichoEntity {
     @Column(name = "posicaoHorizontal")
     private int posicaoHorizontal;
 
-    @ManyToOne
+    @Column(name = "idPrateleira")
+    private Long idPrateleira;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "idPrateleira", insertable = false, updatable = false)
+    @JsonIgnore
     private PrateleiraEntity prateleira;
 
-    @OneToMany
-    private List<DispositivoEntity> dispositivos;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<DispositivoEntity> dispositivos;
 }

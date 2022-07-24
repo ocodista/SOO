@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoriaPlantaServiceImpl extends BaseServiceImpl<CategoriaPlantaDTO, CategoriaPlantaEntity> implements CategoriaPlantaService {
-    final static CategoriaPlantaEntity entity = new CategoriaPlantaEntity();
+
 
     public CategoriaPlantaServiceImpl(ModelMapper modelMapper, CategoriaPlantaRepository categoriaPlantaRepository) {
-        super(modelMapper, categoriaPlantaRepository, entity);
+        super(modelMapper, categoriaPlantaRepository);
+        this.entity = new CategoriaPlantaEntity();
     }
 }

@@ -1,15 +1,8 @@
 package br.unesp.agrotech.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,19 +23,20 @@ public class DispositivoEntity {
     @Column(name = "value")
     private Double value;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idEstante")
-    private EstanteEntity estante;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idTipoDispositivo")
-    private TipoDispositivoEntity tipoDispositivo;
+    @Column(name = "idNicho")
+    private Long idNicho;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idCategoriaDispositivo")
-    private CategoriaDispositivoEntity categoriaDispositivo;
+     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+     @JoinColumn(name = "idNicho", insertable = false, updatable = false)
+     @JsonIgnore
+     private NichoEntity nicho;
+     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+     @JoinColumn(name = "idTipoDispositivo")
+     private TipoDispositivoEntity tipoDispositivo;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idNicho")
-    private NichoEntity nicho;
+     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+     @JoinColumn(name = "idCategoriaDispositivo")
+     private CategoriaDispositivoEntity categoriaDispositivo;
+
 }

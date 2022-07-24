@@ -7,8 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstanteDTO {
+public class CreateEstanteDTO {
     private int qtdPrateleiras;
     private int qtdNichosPorPrateleira;
     private String descricao;
+
+    public String toString() {
+        return "Quantidade prateleiras: " + qtdPrateleiras + "\nQtdNichosPorPrateleira: " + qtdNichosPorPrateleira + "\nDescricao: " + descricao;
+    }
 }

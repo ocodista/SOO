@@ -10,9 +10,8 @@ import br.unesp.agrotech.services.locacao.v1.CategoriaDispositivoService;
 
 @Service
 public class CategoriaDispositivoServiceImpl extends BaseServiceImpl<CategoriaDispositivoDTO, CategoriaDispositivoEntity> implements CategoriaDispositivoService {
-    final static CategoriaDispositivoEntity entity = new CategoriaDispositivoEntity();
-
     public CategoriaDispositivoServiceImpl (ModelMapper modelMapper, CategoriaDispositivoRepository categoriaDispositivoRepository) {
-        super(modelMapper, categoriaDispositivoRepository, entity);
+        super(modelMapper, categoriaDispositivoRepository);
+        this.entity = new CategoriaDispositivoEntity();
     }
 }
