@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import br.unesp.agrotech.dtos.GetDispositivoDTO;
 import br.unesp.agrotech.dtos.PrateleiraDTO;
+import br.unesp.agrotech.utils.RabbitSender;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +39,19 @@ public class DispositivoResource {
 
     private final DispositivoService dispositivoService;
     private final ModelMapper modelMapper;
-
+    private final RabbitSender rabbitSender;
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
-    public ResponseEntity<Void> cadastrarDispositivo(
+    public ResponseEntity<Long> cadastrarDispositivo(
         @ApiParam(value = "Dados da estante que será cadastrada", required = true)
         @Valid @RequestBody CreateDispositivoDTO createDispositivoDto
     ) throws Exception {
-        dispositivoService.cadastrar(createDispositivoDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Long id = dispositivoService.cadastrar(createDispositivoDto);
+        DispositivoEntity entity = dispositivoService.buscarPorId(id);
+        GetDispositivoDTO dto = new GetDispositivoDTO();
+        modelMapper.map(entity, dto);
+        rabbitSender.adicionaDispositivo("dispositivo", dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")

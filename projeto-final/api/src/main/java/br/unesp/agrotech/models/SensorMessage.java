@@ -25,6 +25,9 @@ public class SensorMessage implements Serializable {
     @JsonProperty("label")
     private String label;
 
+    @JsonProperty("type")
+    private String type;
+
     @JsonProperty("category")
     private String category;
 
