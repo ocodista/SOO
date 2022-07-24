@@ -1,5 +1,17 @@
 .App {
   text-align: center;
+  height:100%;
+  width:100%;
+}
+
+.wh-50 {
+    width:50%;
+   height:50%;
+    float: left;
+}
+.wh-100 {
+   width:100%;
+   height:100%;
 }
 
 .App-logo {
