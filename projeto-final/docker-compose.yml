@@ -130,6 +130,8 @@ services:
       - api_network
     ports:
       - '3000:3000'
+    environment:
+      NEXT_PUBLIC_API_URL: 'http://api:8080/agrotech'
 
   socket-client:
     build:
