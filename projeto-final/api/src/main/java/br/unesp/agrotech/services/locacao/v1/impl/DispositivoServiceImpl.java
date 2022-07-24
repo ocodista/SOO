@@ -71,4 +71,12 @@ public class DispositivoServiceImpl extends BaseServiceImpl<CreateDispositivoDTO
         }
         return entities;
     }
+
+    @Override
+    public void atualizaValor(Long dispositivoId, Double value) throws Exception {
+        this.entity = buscarPorId(dispositivoId);
+        this.entity.setValue(value);
+        this.repository.saveAndFlush(entity);
+        cleanEntity();
+    }
 }

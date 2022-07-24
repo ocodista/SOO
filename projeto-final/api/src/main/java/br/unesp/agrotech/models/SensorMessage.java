@@ -17,7 +17,7 @@ import java.util.Date;
 public class SensorMessage implements Serializable {
 
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @JsonProperty("value")
     private double value;

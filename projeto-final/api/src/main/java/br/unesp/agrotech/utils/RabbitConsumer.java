@@ -1,6 +1,9 @@
 package br.unesp.agrotech.utils;
 
+import br.unesp.agrotech.dtos.DispositivoDTO;
+import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.models.SensorMessage;
+import br.unesp.agrotech.services.locacao.v1.DispositivoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,6 +19,8 @@ public class RabbitConsumer {
     private static Logger logger = LogManager.getLogger(RabbitConsumer.class.toString());
     private final SimpMessagingTemplate simpMessagingTemplate;
 
+    private final DispositivoService dispositivoService;
+
     @Value("${websocket.room}")
     private String webSocketRoom;
 
@@ -29,7 +34,13 @@ public class RabbitConsumer {
     }
 
     private void persistMessageToDatabase(SensorMessage message) {
-        //TODO: Persist on database
+        try {
+            Long id = message.getId();
+            dispositivoService.atualizaValor(id, message.getValue());
+        }catch (Exception e) {
+            logger.error("Erro ao persistir atualização do dispositivo\n" + e);
+        }
+
     }
     @RabbitHandler
     public void consume(SensorMessage message) {
