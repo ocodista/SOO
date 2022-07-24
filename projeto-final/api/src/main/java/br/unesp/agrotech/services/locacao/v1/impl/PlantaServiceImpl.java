@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PlantaServiceImpl extends BaseServiceImpl<PlantaDTO, PlantaEntity> implements PlantaService {
-    private final static PlantaEntity entity = new PlantaEntity();
-
     public PlantaServiceImpl(ModelMapper modelMapper, PlantaRepository repository) {
-        super(modelMapper, repository, entity);
+        super(modelMapper, repository);
+        this.entity = new PlantaEntity();
     }
 }

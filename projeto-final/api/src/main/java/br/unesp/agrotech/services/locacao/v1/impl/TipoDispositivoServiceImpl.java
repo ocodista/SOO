@@ -10,9 +10,8 @@ import br.unesp.agrotech.services.locacao.v1.TipoDispositivoService;
 
 @Service
 public class TipoDispositivoServiceImpl extends BaseServiceImpl<TipoDispositivoDTO, TipoDispositivoEntity> implements TipoDispositivoService {
-    final static TipoDispositivoEntity entity = new TipoDispositivoEntity();
-
     public TipoDispositivoServiceImpl(ModelMapper modelMapper, TipoDispositivoRepository repository) {
-        super(modelMapper, repository, entity);
+        super(modelMapper, repository);
+        this.entity = new TipoDispositivoEntity();
     }
 }

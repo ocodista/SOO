@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, DispositivoEntity> implements DispositivoService {
-    private final static DispositivoEntity entity = new DispositivoEntity();
-
     private final EstanteService estanteService;
     private final DispositivoRepository dispositivoRepository;
     private final TipoDispositivoService tipoDispositivoService;
@@ -33,7 +31,8 @@ public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, Disp
         CategoriaDispositivoService categoriaDispositivoService,
         NichoService nichoService) {
 
-        super(modelMapper, dispositivoRepository, entity);
+        super(modelMapper, dispositivoRepository);
+        this.entity = new DispositivoEntity();
         this.estanteService = estanteService;
         this.dispositivoRepository = dispositivoRepository;
         this.tipoDispositivoService = tipoDispositivoService;
@@ -42,7 +41,7 @@ public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, Disp
     }
 
     @Override
-    public void cadastrar(DispositivoDTO dispositivoDTO) throws Exception {
+    public Long cadastrar(DispositivoDTO dispositivoDTO) throws Exception {
         EstanteEntity estanteEntity = estanteService.buscarPorId(dispositivoDTO.getIdEstante());
         TipoDispositivoEntity tipoDispositivoEntity = tipoDispositivoService.buscarPorId(dispositivoDTO.getIdTipoDispositivo());
         CategoriaDispositivoEntity categoriaDispositivoEntity = categoriaDispositivoService.buscarPorId(dispositivoDTO.getIdCategoriaDispositivo());
@@ -54,7 +53,7 @@ public class DispositivoServiceImpl extends BaseServiceImpl<DispositivoDTO, Disp
         entity.setTipoDispositivo(tipoDispositivoEntity);
 
         try {
-            dispositivoRepository.save(entity);
+            return dispositivoRepository.saveAndFlush(entity).getId();
         } catch(Exception exception) {
             throw new Exception("Erro ao salvar dados", exception);
         }
