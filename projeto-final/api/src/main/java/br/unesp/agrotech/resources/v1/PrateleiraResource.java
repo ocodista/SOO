@@ -17,6 +17,7 @@ import java.util.List;
 @Api(tags = { "Prateleira" })
 @RestController
 @RequestMapping("/prateleira")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class PrateleiraResource {
 
