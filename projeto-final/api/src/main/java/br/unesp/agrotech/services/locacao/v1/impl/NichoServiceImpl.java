@@ -1,7 +1,9 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
 import br.unesp.agrotech.entities.DispositivoEntity;
+import br.unesp.agrotech.entities.PlantaEntity;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
+import br.unesp.agrotech.services.locacao.v1.PlantaService;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
@@ -22,16 +24,18 @@ import java.util.List;
 @Service
 public class NichoServiceImpl extends BaseServiceImpl<NichoDTO, NichoEntity> implements NichoService {
 
-    public NichoServiceImpl(ModelMapper modelMapper, NichoRepository repository, EntityManager entityManager, DispositivoService dispositivoService) {
+    public NichoServiceImpl(ModelMapper modelMapper, NichoRepository repository, EntityManager entityManager, DispositivoService dispositivoService, PlantaService plantaService) {
         super(modelMapper, repository);
         this.entityManager = entityManager;
         this.dispositivoService = dispositivoService;
+        this.plantaService = plantaService;
         this.entity = new NichoEntity();
     }
 
     private final EntityManager entityManager;
     private final DispositivoService dispositivoService;
 
+    private final PlantaService plantaService;
     public List<NichoEntity> buscarPorPrateleira(Long prateleiraId) throws Exception {
         Session session = (Session) entityManager.getDelegate();
 
@@ -48,6 +52,8 @@ public class NichoServiceImpl extends BaseServiceImpl<NichoDTO, NichoEntity> imp
             Long id = nicho.getId();
             List<DispositivoEntity> dispositivos = dispositivoService.buscarPorNicho(id);
             nicho.setDispositivos(new HashSet<>(dispositivos));
+            List<PlantaEntity> plantas = plantaService.buscarPorNicho(id);
+            nicho.setPlantas(new HashSet<>(plantas));
             nicho.setPrateleira(null);
         }
         return entities;

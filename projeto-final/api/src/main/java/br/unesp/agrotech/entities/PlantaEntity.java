@@ -2,6 +2,7 @@ package br.unesp.agrotech.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,11 +28,15 @@ public class PlantaEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPlantio;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "idNicho")
+
+    @Column(name = "idNicho")
+    private Long idNicho;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idNicho", updatable = false, insertable = false)
+    @JsonIgnore
     private NichoEntity nicho;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idCategoriaPlanta")
     private CategoriaPlantaEntity categoriaPlanta;
 }

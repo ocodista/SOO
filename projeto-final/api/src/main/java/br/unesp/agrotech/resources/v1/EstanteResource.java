@@ -46,7 +46,7 @@ public class EstanteResource {
             int posicaoHorizontal = j + 1;
 
             logger.info("Criando nicho " + posicaoHorizontal + " da estante " + estanteId + " prateleira " + prateleiraId);
-            NichoDTO novoNicho = new NichoDTO(0L, posicaoHorizontal, prateleiraId, new HashSet<>());
+            NichoDTO novoNicho = new NichoDTO(0L, posicaoHorizontal, prateleiraId, new HashSet<>(), new HashSet<>());
             Long nichoId = nichoService.cadastrar(novoNicho);
             logger.info("Nicho ID " + nichoId + " criado com sucesso!");
         }

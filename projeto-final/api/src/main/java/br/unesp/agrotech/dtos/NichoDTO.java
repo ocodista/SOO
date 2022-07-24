@@ -13,6 +13,7 @@ public class NichoDTO {
     private Long id;
     private int posicaoHorizontal;
     private Long idPrateleira;
-
     private Set<GetDispositivoDTO> dispositivos;
+
+    private Set<GetPlantaDTO> plantas;
 }
