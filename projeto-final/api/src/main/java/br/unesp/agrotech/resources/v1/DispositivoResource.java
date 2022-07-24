@@ -1,9 +1,14 @@
 package br.unesp.agrotech.resources.v1;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import br.unesp.agrotech.dtos.GetDispositivoDTO;
+import br.unesp.agrotech.dtos.PrateleiraDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 public class DispositivoResource {
 
     private final DispositivoService dispositivoService;
+    private final ModelMapper modelMapper;
 
     @ApiOperation(value = "Este serviço cadastra novas estantes")
     @PostMapping("/")
@@ -43,9 +49,12 @@ public class DispositivoResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<DispositivoEntity>> buscarDispositivo() throws Exception {
-        List<DispositivoEntity> dispositivos = dispositivoService.buscar();
-        return ResponseEntity.status(HttpStatus.OK).body(dispositivos);
+    public ResponseEntity<List<GetDispositivoDTO>> buscarDispositivo() throws Exception {
+        List<DispositivoEntity> entities = dispositivoService.buscar();
+        List<GetDispositivoDTO> mappedDispositivos = Arrays.asList(modelMapper.map(entities, GetDispositivoDTO[].class));
+        modelMapper.map(entities, mappedDispositivos);
+
+        return ResponseEntity.status(HttpStatus.OK).body(mappedDispositivos);
     }
 
     @ApiOperation(value = "Este serviço atualiza um dispositivo através do id")
