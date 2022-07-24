@@ -7,8 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoDispositivoDTO {
+public class CreateDispositivoDTO {
 
     private Long id;
-    private String nome;
+    private Double value;
+
+    private Long idTipoDispositivo;
+    private Long idNicho;
+    private Long idCategoriaDispositivo;
 }

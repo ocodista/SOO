@@ -13,7 +13,6 @@ import br.unesp.agrotech.services.locacao.v1.PrateleiraService;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,16 +20,17 @@ import javax.persistence.criteria.Root;
 
 @Service
 public class PrateleiraServiceImpl extends BaseServiceImpl<PrateleiraDTO, PrateleiraEntity> implements PrateleiraService {
-    public PrateleiraServiceImpl (ModelMapper modelMapper, EntityManager entityManager, PrateleiraRepository injectedRepository) {
-        super(modelMapper, injectedRepository);
+    public PrateleiraServiceImpl (ModelMapper modelMapper, EntityManager entityManager, NichoServiceImpl nichoService, PrateleiraRepository repository) {
+        super(modelMapper, repository);
         this.entityManager = entityManager;
-        repository = injectedRepository;
+        this.nichoService = nichoService;
+        this.repository = repository;
         this.entity = new PrateleiraEntity();
     }
 
     private final EntityManager entityManager;
-    private NichoServiceImpl nichoService;
-    private PrateleiraRepository repository;
+    private final NichoServiceImpl nichoService;
+    private final PrateleiraRepository repository;
 
     public List<PrateleiraEntity> buscarPorEstante(Long estanteId) throws Exception {
         try {
@@ -52,6 +52,7 @@ public class PrateleiraServiceImpl extends BaseServiceImpl<PrateleiraDTO, Pratel
                 Long id = entity.getId();
                 List<NichoEntity> nichos = nichoService.buscarPorPrateleira(id);
                 entity.setNichos(new HashSet(nichos));
+                entity.setEstante(null);
             }
             return entities;
 

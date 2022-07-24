@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
     private final ModelMapper modelMapper;
-    private final JpaRepository<E, Long> repository;
+    protected final JpaRepository<E, Long> repository;
     protected E entity;
 
     @Override

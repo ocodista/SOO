@@ -26,9 +26,6 @@ public class EstanteEntity {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @OneToMany(mappedBy = "estante")
-    private Set<DispositivoEntity> dispositivos;
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<PrateleiraEntity> prateleiras;
 }

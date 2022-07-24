@@ -4,10 +4,7 @@ import java.util.*;
 
 import javax.validation.Valid;
 
-import br.unesp.agrotech.dtos.CreateEstanteDTO;
-import br.unesp.agrotech.dtos.GetEstanteDto;
-import br.unesp.agrotech.dtos.NichoDTO;
-import br.unesp.agrotech.dtos.PrateleiraDTO;
+import br.unesp.agrotech.dtos.*;
 import br.unesp.agrotech.entities.EstanteEntity;
 import br.unesp.agrotech.entities.PrateleiraEntity;
 import br.unesp.agrotech.services.locacao.v1.EstanteService;
@@ -55,13 +52,13 @@ public class EstanteResource {
         for (int i = 0; i < createEstanteDTO.getQtdPrateleiras(); i++) {
             int posicaoVertical = i + 1;
             logger.info("Criando prateleira " + posicaoVertical + " da estante " + estanteId);
-            PrateleiraDTO novaPrateleira = new PrateleiraDTO(posicaoVertical, estanteId, new HashSet<>());
+            PrateleiraDTO novaPrateleira = new PrateleiraDTO(0L, posicaoVertical, estanteId, new HashSet<>());
             Long prateleiraId = prateleiraService.cadastrar(novaPrateleira);
             logger.info("Prateleira ID " + prateleiraId + " criada com sucesso!");
             for(int j = 0; j < createEstanteDTO.getQtdNichosPorPrateleira(); j++) {
                 int posicaoHorizontal = j + 1;
                 logger.info("Criando nicho " + posicaoHorizontal + " da estante " + estanteId + " prateleira " + prateleiraId);
-                NichoDTO novoNicho = new NichoDTO(posicaoHorizontal, prateleiraId);
+                NichoDTO novoNicho = new NichoDTO(0L, posicaoHorizontal, prateleiraId, new HashSet<>());
                 Long nichoId = nichoService.cadastrar(novoNicho);
                 logger.info("Nicho ID " + nichoId + " criado com sucesso!");
             }

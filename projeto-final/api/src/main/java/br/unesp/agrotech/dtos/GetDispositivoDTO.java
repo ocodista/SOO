@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DispositivoDTO {
+public class GetDispositivoDTO {
+    private Long id;
     private Double value;
-    private Long idEstante;
-    private Long idTipoDispositivo;
+
+    private TipoDispositivoDTO tipoDispositivo;
+
+    private CategoriaDispositivoDTO categoriaDispositivo;
     private Long idNicho;
-    private Long idCategoriaDispositivo;
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.unesp.agrotech.dtos.DispositivoDTO;
+import br.unesp.agrotech.dtos.CreateDispositivoDTO;
 import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;
 import io.swagger.annotations.Api;
@@ -35,9 +35,9 @@ public class DispositivoResource {
     @PostMapping("/")
     public ResponseEntity<Void> cadastrarDispositivo(
         @ApiParam(value = "Dados da estante que será cadastrada", required = true)
-        @Valid @RequestBody DispositivoDTO dispositivoDto
+        @Valid @RequestBody CreateDispositivoDTO createDispositivoDto
     ) throws Exception {
-        dispositivoService.cadastrar(dispositivoDto);
+        dispositivoService.cadastrar(createDispositivoDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -54,9 +54,9 @@ public class DispositivoResource {
         @ApiParam(value = "Id do dispositivo a ser atualizada", required = true)
         @PathVariable("idDispositivo") String idDispositivo,
         @ApiParam(value = "Dados do dispositivo que podem ser atualizados")
-        @RequestBody DispositivoDTO dispositivoDto
+        @RequestBody CreateDispositivoDTO createDispositivoDto
     ) throws Exception {
-        DispositivoEntity dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), dispositivoDto);
+        DispositivoEntity dispositivoAtualizado = dispositivoService.atualizar(Long.parseLong(idDispositivo), createDispositivoDto);
         return ResponseEntity.status(HttpStatus.OK).body(dispositivoAtualizado);
     }
 

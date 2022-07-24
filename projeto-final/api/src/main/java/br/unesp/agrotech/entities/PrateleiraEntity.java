@@ -37,6 +37,6 @@ public class PrateleiraEntity {
     @JsonIgnore
     private EstanteEntity estante;
 
-    @OneToMany(fetch = EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = LAZY, cascade = CascadeType.ALL)
     private Set<NichoEntity> nichos;
 }
