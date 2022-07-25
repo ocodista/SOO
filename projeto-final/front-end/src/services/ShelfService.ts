@@ -1,6 +1,5 @@
 import { AxiosInstance } from './AxiosInstance'
 import { CadastroEstanteType, EstanteType, NichoType } from './types'
-import { EstanteMock } from './__mocks__/EstanteMock'
 
 export class ShelfService {
   private static readonly axios = AxiosInstance()
@@ -15,9 +14,10 @@ export class ShelfService {
     }
   }
 
-  static async createShelf (data: CadastroEstanteType): Promise<void> {
+  static async createShelf (data: CadastroEstanteType): Promise<number> {
     try {
-      await ShelfService.axios.post('/estante/', { ...data })
+      const response = await ShelfService.axios.post('/estante/', { ...data })
+      return response.data
     } catch (error) {
       throw new Error('Erro ao buscar as estantes')
     }

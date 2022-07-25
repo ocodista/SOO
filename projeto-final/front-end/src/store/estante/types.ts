@@ -1,5 +1,5 @@
 import { EstanteType } from '../../services/types'
-import { CHANGE_ESTANTE_FAILURE, CHANGE_ESTANTE_REQUEST, CHANGE_ESTANTE_SUCCESS, FETCH_ESTANTE_FAILURE, FETCH_ESTANTE_REQUEST, FETCH_ESTANTE_SUCCESS, SET_CURRENT_ESTANTE } from './actions'
+import { ADD_ESTANTE, CHANGE_ESTANTE_FAILURE, CHANGE_ESTANTE_REQUEST, CHANGE_ESTANTE_SUCCESS, FETCH_ESTANTE_FAILURE, FETCH_ESTANTE_REQUEST, FETCH_ESTANTE_SUCCESS, SET_CURRENT_ESTANTE, SET_ESTANTES } from './actions'
 
 export type EstanteState = {
   loading: boolean;
@@ -41,6 +41,18 @@ export type SetCurrentEstante = {
   payload: { estante: EstanteState['current'] }
 }
 
+export type AddEstante = {
+  type: typeof ADD_ESTANTE;
+  payload: { estante: EstanteType }
+}
+
+export type SetEstantes = {
+  type: typeof SET_ESTANTES;
+  payload: {
+    estantes: EstanteType[]
+  }
+}
+
 export type EstanteActions = FetchEstanteRequest
   | FetchEstanteSuccess
   | FetchEstanteFailure
@@ -48,3 +60,5 @@ export type EstanteActions = FetchEstanteRequest
   | ChangeEstanteSuccess
   | ChangeEstanteFailure
   | SetCurrentEstante
+  | AddEstante
+  | SetEstantes

@@ -4,10 +4,7 @@ import { AppState } from '../../store'
 
 export function ResumeShelf () {
   const { current } = useSelector(({ estante }: AppState) => estante)
-
-  if (current === null) {
-    return null
-  }
+  if (!current) return null
 
   const renderDetalhes = () => {
     let totalSensores = 0
@@ -52,7 +49,7 @@ export function ResumeShelf () {
     >
       <Flex direction="column" padding="1rem" gap="0.5rem">
         <Text fontSize="1.3rem" color="green.600">
-          Resumo da Estante { current.id }
+          Resumo da Estante { current?.id }
         </Text>
 
         <Divider borderColor="green.600" orientation="horizontal" />

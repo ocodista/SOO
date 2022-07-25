@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchEstanteRequest, fetchEstanteSuccess, setCurrentEstante } from '../store/estante/actions'
 import { AppState } from '../store'
+import { useRouter } from 'next/router'
 
 interface IHome {
   estantes ?: EstanteType[]
@@ -18,6 +19,13 @@ interface IHome {
 const Home: NextPage = ({ estantes }: IHome) => {
   const { estantes: estantesState } = useSelector(({ estante }: AppState) => estante)
   const dispatch = useDispatch()
+  const router = useRouter()
+  useEffect(() => {
+    if (!estantes?.length) {
+      router.push('/estantes')
+    }
+  }, [router, estantes])
+
   useEffect(() => {
     dispatch(fetchEstanteRequest())
     if (estantes) {

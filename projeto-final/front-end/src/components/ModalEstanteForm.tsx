@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { Button, Flex, Input, InputGroup, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import { ShelfService } from '../services/ShelfService'
+import { addEstante } from '../store/estante/actions'
+import { useDispatch } from 'react-redux'
+import { EstanteType } from '../services/types'
 
 export function ModalEstanteForm () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [descricao, setDescricao] = useState<string>('')
   const [qtdNicho, setQtdNicho] = useState<number>(0)
   const [qtdPrateleiras, setQtdPrateleiras] = useState<number>(0)
+  const dispatch = useDispatch()
 
   const salvar = () => {
     if (!descricao || !qtdNicho || !qtdPrateleiras) {
@@ -16,8 +20,20 @@ export function ModalEstanteForm () {
         descricao,
         qtdNichosPorPrateleira: qtdNicho,
         qtdPrateleiras
-      }).then(() => {
+      }).then((id) => {
         alert('Cadastro feito com sucesso')
+        const estante: EstanteType = {
+          id,
+          descricao,
+          qtdNichosPorPrateleira: qtdNicho,
+          qtdPrateleiras,
+          prateleiras: new Array(qtdPrateleiras).fill({
+            nichos: new Array(qtdNicho).fill({
+              dispositivos: []
+            })
+          })
+        }
+        dispatch(addEstante({ estante }))
         setDescricao('')
         setQtdNicho(0)
         setQtdPrateleiras(0)
@@ -74,7 +90,7 @@ export function ModalEstanteForm () {
                   <Input
                     placeholder="Ex: 2"
                     value={qtdPrateleiras}
-                    onChange={(e) => changeQtdPrateleiras(Number(e.currentTarget.value))}
+                    onChange={(e) => changeQtdPrateleiras(e.currentTarget.value)}
                   />
                 </VStack>
               </InputGroup>
@@ -85,7 +101,7 @@ export function ModalEstanteForm () {
                 <Input
                   placeholder="Ex: 2"
                   value={qtdNicho}
-                  onChange={(e) => changeQtdNichos(Number(e.currentTarget.value))}
+                  onChange={(e) => changeQtdNichos(e.currentTarget.value)}
                 />
                 </VStack>
               </InputGroup>

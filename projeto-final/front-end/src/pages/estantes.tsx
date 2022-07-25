@@ -4,18 +4,31 @@ import {
   Text
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Header } from '../components/Header'
 import { ModalEstanteForm } from '../components/ModalEstanteForm'
 import { ShelfTable } from '../components/Shelf/ShelfTable'
 import { ShelfService } from '../services/ShelfService'
 import { EstanteType } from '../services/types'
+import { AppState } from '../store'
+import { setEstantes } from '../store/estante/actions'
 
 interface IEstantes {
   estantes?: EstanteType[];
 }
 
-const Estantes: NextPage = ({ estantes }: IEstantes) => {
+const Estantes: NextPage = ({ estantes: estantesApi }: IEstantes) => {
+  const { estantes } = useSelector(({ estante }: AppState) => estante)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (estantesApi) {
+      dispatch(setEstantes({ estantes: estantesApi }))
+    }
+  }, [dispatch, estantesApi])
+
   if (!estantes) {
+    console.log('Nenhuma estante!', estantes)
     return null
   }
 
@@ -41,7 +54,7 @@ const Estantes: NextPage = ({ estantes }: IEstantes) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        {estantes
+        {estantes?.length
           ? (<ShelfTable estantes={estantes}/>)
           : (<Text>Não há estantes</Text>)}
         <Flex width="100%" alignItems="end" paddingY="2rem" justifyContent="flex-end">

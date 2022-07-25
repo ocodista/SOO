@@ -1,4 +1,4 @@
-import { FETCH_ESTANTE_FAILURE, FETCH_ESTANTE_REQUEST, FETCH_ESTANTE_SUCCESS, SET_CURRENT_ESTANTE } from './actions'
+import { ADD_ESTANTE, FETCH_ESTANTE_FAILURE, FETCH_ESTANTE_REQUEST, FETCH_ESTANTE_SUCCESS, SET_CURRENT_ESTANTE, SET_ESTANTES } from './actions'
 import { EstanteActions, EstanteState } from './types'
 
 const estanteInitialState: EstanteState = {
@@ -34,6 +34,17 @@ export const estanteReducer = (state: EstanteState = estanteInitialState, action
         loading: false,
         error: null,
         current: action.payload.estante
+      }
+    case ADD_ESTANTE:
+      return {
+        ...state,
+        estantes: [...state.estantes, action.payload.estante],
+        current: action.payload.estante
+      }
+    case SET_ESTANTES:
+      return {
+        ...state,
+        estantes: action.payload.estantes
       }
     default:
       return {
