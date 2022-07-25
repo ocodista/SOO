@@ -38,6 +38,7 @@ services:
       CATEGORIA_ID: 2
       CATEGORIA_NOME: 'Umidade do Ar'
       CATEGORIA_MEDIDA: '%'
+      START_VALUE: 80
       POSICAO_VERTICAL: 1
       POSICAO_HORIZONTAL: 1
     networks:
@@ -56,6 +57,7 @@ services:
       CATEGORIA_ID: 3
       CATEGORIA_NOME: 'Umidade do Solo'
       CATEGORIA_MEDIDA: '%'
+      START_VALUE: 60
       POSICAO_VERTICAL: 1
       POSICAO_HORIZONTAL: 1
     networks:
@@ -74,6 +76,7 @@ services:
       CATEGORIA_ID: 1
       CATEGORIA_NOME: 'Temperatura'
       CATEGORIA_MEDIDA: 'ºC'
+      START_VALUE: 27
       POSICAO_VERTICAL: 2
       POSICAO_HORIZONTAL: 1
     networks:
