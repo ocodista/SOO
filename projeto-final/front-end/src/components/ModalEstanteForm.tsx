@@ -90,7 +90,7 @@ export function ModalEstanteForm () {
                   <Input
                     placeholder="Ex: 2"
                     value={qtdPrateleiras}
-                    onChange={(e) => changeQtdPrateleiras(e.currentTarget.value)}
+                    onChange={(e) => changeQtdPrateleiras(Number(e.currentTarget.value))}
                   />
                 </VStack>
               </InputGroup>
@@ -101,7 +101,7 @@ export function ModalEstanteForm () {
                 <Input
                   placeholder="Ex: 2"
                   value={qtdNicho}
-                  onChange={(e) => changeQtdNichos(e.currentTarget.value)}
+                  onChange={(e) => changeQtdNichos(Number(e.currentTarget.value))}
                 />
                 </VStack>
               </InputGroup>

@@ -1,6 +1,6 @@
 import axios from 'axios'
-const localIp = '192.168.112.1'
-const baseURL = process.env.NEXT_PUBLIC_API_URL || `http://${localIp}:8080/agrotech`
+const server = 'localhost'
+const baseURL = process.env.NEXT_PUBLIC_API_URL || `http://${server}:8080/agrotech`
 export function AxiosInstance () {
   return axios.create({
     baseURL,
