@@ -10,4 +10,6 @@ import java.util.List;
 @Service
 public interface DispositivoService extends BaseService<CreateDispositivoDTO, DispositivoEntity> {
     List<DispositivoEntity> buscarPorNicho(Long nichoId) throws Exception;
+
+    void atualizaValor(Long dispositivoId, Double value) throws Exception;
 }

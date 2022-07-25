@@ -17,6 +17,7 @@ import java.util.List;
 @Api(tags = { "Nicho" })
 @RestController
 @RequestMapping("/nicho")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class NichoResource {
 

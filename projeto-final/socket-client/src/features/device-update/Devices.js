@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectSensors } from "./sensorsSlice";
-import SensorChart from "../sensor-chart/SensorChart";
+import { selectDevices } from "./devicesSlice";
+import DeviceChart from "../device-chart/DeviceChart";
 
 const leadingZero = (str) => (str.toString().length === 1 ? `0${str}` : str);
 
@@ -38,43 +38,39 @@ function Message({ sentAt, value, label, idx }) {
     );
 }
 
-function Sensor({ id, category, label, values }) {
-    const name = `Sensor ${id} - ${category} (${label})`;
+function Device({ id, type, category, label, values }) {
+    const formattedLabel = label ? `(${label})` : "";
+    const name = `${type} ${id} - ${category} ${formattedLabel}`;
     const chartData = values.map(({ value, sentAt }) => ({
         name,
         value,
         sentAt: formattedTime(sentAt),
     }));
 
-    const renderValues = () =>
-        values.map((value, idx) => (
-            <Message {...value} label={label} idx={idx} />
-        ));
-
     return (
         <section className="wh-50" style={{ paddingBottom: 20 }}>
-            <SensorChart title={name} data={chartData} category={category} />
+            <DeviceChart title={name} data={chartData} category={category} />
         </section>
     );
 }
 
-export function Sensors() {
-    const sensors = useSelector(selectSensors);
-    let orderedSensors = [...sensors];
+export function Devices() {
+    const devices = useSelector(selectDevices);
+    let orderedDevices = [...devices];
 
-    orderedSensors = orderedSensors.sort((a, b) => a.id - b.id);
+    orderedDevices = orderedDevices.sort((a, b) => a.id - b.id);
 
-    const renderSensors = () => {
-        if (!sensors.length) return <h2>Nenhum dado foi encontrado...</h2>;
-        return orderedSensors.map((sensor, i) => (
-            <Sensor key={i} {...sensor} />
+    const renderDevices = () => {
+        if (!devices.length) return <h2>Nenhum dado foi encontrado...</h2>;
+        return orderedDevices.map((device, i) => (
+            <Device key={i} {...device} />
         ));
     };
 
     return (
         <>
-            <h1>Sensores</h1>
-            <div class="wh-100">{renderSensors()}</div>
+            <h1>Dispositivos</h1>
+            <div class="wh-100">{renderDevices()}</div>
         </>
     );
 }

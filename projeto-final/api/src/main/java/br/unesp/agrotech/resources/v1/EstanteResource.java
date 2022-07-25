@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 @Api(tags = { "Estante" })
 @RestController
 @RequestMapping("/estante")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class EstanteResource {
     private static Logger logger = LogManager.getLogger(EstanteResource.class.toString());
@@ -46,7 +48,7 @@ public class EstanteResource {
             int posicaoHorizontal = j + 1;
 
             logger.info("Criando nicho " + posicaoHorizontal + " da estante " + estanteId + " prateleira " + prateleiraId);
-            NichoDTO novoNicho = new NichoDTO(0L, posicaoHorizontal, prateleiraId, new HashSet<>());
+            NichoDTO novoNicho = new NichoDTO(0L, posicaoHorizontal, prateleiraId, new HashSet<>(), new HashSet<>());
             Long nichoId = nichoService.cadastrar(novoNicho);
             logger.info("Nicho ID " + nichoId + " criado com sucesso!");
         }
@@ -89,9 +91,28 @@ public class EstanteResource {
 
     @ApiOperation(value = "Este serviço retorna uma lista de estantes")
     @GetMapping("/")
-    public ResponseEntity<List<EstanteEntity>> buscarEstantes() throws Exception {
+    public ResponseEntity<List<GetEstanteDto>> buscarEstantes() throws Exception {
         List<EstanteEntity> listEstante = estanteService.buscar();
-        return ResponseEntity.status(HttpStatus.OK).body(listEstante);
+        List<GetEstanteDto> estantesPopuladas = new ArrayList<>();
+        for(EstanteEntity estante:listEstante) {
+            estantesPopuladas.add(estanteEntityPopulada(estante));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(estantesPopuladas);
+    }
+
+    private GetEstanteDto estanteEntityPopulada(EstanteEntity estante) throws Exception {
+        // Popula estante
+        GetEstanteDto dto = new GetEstanteDto();
+        modelMapper.map(estante, dto);
+
+        // Popula prateleiras
+        Long idEstante = estante.getId();
+        List<PrateleiraEntity> prateleiras = prateleiraService.buscarPorEstante(idEstante);
+        List<PrateleiraDTO> mappedPrateleiras = Arrays.asList(modelMapper.map(prateleiras, PrateleiraDTO[].class));
+        modelMapper.map(prateleiras, mappedPrateleiras);
+        dto.setPrateleiras(new HashSet<PrateleiraDTO>(mappedPrateleiras));
+        return dto;
     }
 
     @ApiOperation(value = "Este serviço retorna uma determinada estante")
@@ -100,17 +121,8 @@ public class EstanteResource {
         @ApiParam(value = "Id da estante a ser atualizada", required = true)
         @PathVariable("idEstante") Long idEstante
     ) throws Exception {
-        // Popula estante
         EstanteEntity estante = estanteService.buscarPorId(idEstante);
-        GetEstanteDto dto = new GetEstanteDto();
-        modelMapper.map(estante, dto);
-
-        // Popula prateleiras
-        List<PrateleiraEntity> prateleiras = prateleiraService.buscarPorEstante(idEstante);
-        List<PrateleiraDTO> mappedPrateleiras = Arrays.asList(modelMapper.map(prateleiras, PrateleiraDTO[].class));
-        modelMapper.map(prateleiras, mappedPrateleiras);
-        dto.setPrateleiras(new HashSet<PrateleiraDTO>(mappedPrateleiras));
-
+        GetEstanteDto dto = estanteEntityPopulada(estante);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
     @ApiOperation(value = "Este serviço atualiza uma estante através do id")

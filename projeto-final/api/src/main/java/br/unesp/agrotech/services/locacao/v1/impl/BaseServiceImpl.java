@@ -19,9 +19,12 @@ public class BaseServiceImpl<DTO, E> implements BaseService<DTO, E>{
     protected final JpaRepository<E, Long> repository;
     protected E entity;
 
+    protected void cleanEntity() throws  Exception{
+        entity = (E) entity.getClass().getDeclaredConstructor().newInstance();
+    }
     @Override
     public Long cadastrar(DTO dto) throws Exception {
-        entity = (E) entity.getClass().getDeclaredConstructor().newInstance();
+        cleanEntity();
         modelMapper.map(dto, entity);
         try {
             Object createdEntity = repository.saveAndFlush(entity);

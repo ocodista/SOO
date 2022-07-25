@@ -3,9 +3,10 @@ import { ItemNavigation } from './ItemNavigation'
 
 export function Navigation () {
   const pages = [
+    { text: 'Home', redirect: '/' },
     { text: 'Estantes', redirect: '/estantes' },
     { text: 'Dispositivos', redirect: '/dispositivos' },
-    { text: 'Relatórios', redirect: '/relatorios' },
+    { text: 'Relatórios', redirect: 'http://localhost:3001', newPage: true },
     { text: 'Configurações', redirect: '/configuracoes' }
   ]
 
@@ -16,8 +17,12 @@ export function Navigation () {
       alignItems="center"
       height="100%"
     >
-      { pages.map(({ text, redirect }, index) => (
-        <ItemNavigation key={text + index} text={text} redirect={redirect} />
+      { pages.map(({ text, redirect, newPage = false }, index) => (
+        <ItemNavigation key={text + index}
+          text={text}
+          redirect={redirect}
+          newPage={newPage}
+        />
       ))}
     </Flex>
   )

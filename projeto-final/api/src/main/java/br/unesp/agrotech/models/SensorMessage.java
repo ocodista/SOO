@@ -17,13 +17,16 @@ import java.util.Date;
 public class SensorMessage implements Serializable {
 
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @JsonProperty("value")
     private double value;
 
     @JsonProperty("label")
     private String label;
+
+    @JsonProperty("type")
+    private String type;
 
     @JsonProperty("category")
     private String category;

@@ -9,9 +9,10 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlantaDTO {
+public class GetPlantaDTO {
     private String nome;
     private Date dataPlantio;
-    private Long idCategoriaPlanta;
+
+    private CategoriaPlantaDTO categoriaPlanta;
     private long idNicho;
 }

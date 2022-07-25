@@ -1,6 +1,8 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
 import br.unesp.agrotech.dtos.CreateDispositivoDTO;
+import br.unesp.agrotech.dtos.DispositivoDTO;
+import br.unesp.agrotech.dtos.GetDispositivoDTO;
 import br.unesp.agrotech.entities.CategoriaDispositivoEntity;
 import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.entities.TipoDispositivoEntity;
@@ -68,5 +70,13 @@ public class DispositivoServiceImpl extends BaseServiceImpl<CreateDispositivoDTO
             dispositivo.setNicho(null);
         }
         return entities;
+    }
+
+    @Override
+    public void atualizaValor(Long dispositivoId, Double value) throws Exception {
+        this.entity = buscarPorId(dispositivoId);
+        this.entity.setValue(value);
+        this.repository.saveAndFlush(entity);
+        cleanEntity();
     }
 }

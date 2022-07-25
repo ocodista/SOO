@@ -1,6 +1,6 @@
 package br.unesp.agrotech.resources.v1;
 
-import br.unesp.agrotech.dtos.PlantaDTO;
+import br.unesp.agrotech.dtos.CreatePlantaDTO;
 import br.unesp.agrotech.entities.PlantaEntity;
 import br.unesp.agrotech.services.locacao.v1.PlantaService;
 import io.swagger.annotations.Api;
@@ -17,6 +17,7 @@ import java.util.List;
 @Api(tags = { "Planta" })
 @RestController
 @RequestMapping("/planta")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class PlantaResource {
 
@@ -26,9 +27,9 @@ public class PlantaResource {
     @PostMapping("/")
     public ResponseEntity<Void> cadastrarPlanta(
         @ApiParam(value = "Dados da planta que será cadastrada", required = true)
-        @Valid @RequestBody PlantaDTO plantaDto
+        @Valid @RequestBody CreatePlantaDTO createPlantaDto
     ) throws Exception {
-        plantaService.cadastrar(plantaDto);
+        plantaService.cadastrar(createPlantaDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -45,9 +46,9 @@ public class PlantaResource {
         @ApiParam(value = "Id da planta a ser atualizada", required = true)
         @PathVariable("idPlanta") String idPlanta,
         @ApiParam(value = "Dados da planta que podem ser atualizados")
-        @RequestBody PlantaDTO plantaDto
+        @RequestBody CreatePlantaDTO createPlantaDto
     ) throws Exception {
-        PlantaEntity plantaAtualizado = plantaService.atualizar(Long.parseLong(idPlanta), plantaDto);
+        PlantaEntity plantaAtualizado = plantaService.atualizar(Long.parseLong(idPlanta), createPlantaDto);
         return ResponseEntity.status(HttpStatus.OK).body(plantaAtualizado);
     }
 

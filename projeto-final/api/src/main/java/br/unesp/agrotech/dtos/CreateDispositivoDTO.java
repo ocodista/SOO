@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateDispositivoDTO {
-
-    private Long id;
     private Double value;
 
     private Long idTipoDispositivo;

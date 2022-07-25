@@ -34,4 +34,7 @@ public class NichoEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<DispositivoEntity> dispositivos;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<PlantaEntity> plantas;
 }
