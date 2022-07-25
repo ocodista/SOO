@@ -1,6 +1,5 @@
 package br.unesp.agrotech.utils;
 
-import br.unesp.agrotech.dtos.DispositivoDTO;
 import br.unesp.agrotech.dtos.GetDispositivoDTO;
 import br.unesp.agrotech.models.SensorMessage;
 import org.apache.logging.log4j.LogManager;

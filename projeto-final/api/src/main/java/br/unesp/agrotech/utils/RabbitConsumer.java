@@ -1,6 +1,5 @@
 package br.unesp.agrotech.utils;
 
-import br.unesp.agrotech.dtos.DispositivoDTO;
 import br.unesp.agrotech.entities.DispositivoEntity;
 import br.unesp.agrotech.models.SensorMessage;
 import br.unesp.agrotech.services.locacao.v1.DispositivoService;

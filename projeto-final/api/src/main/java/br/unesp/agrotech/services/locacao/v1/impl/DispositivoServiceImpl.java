@@ -1,7 +1,6 @@
 package br.unesp.agrotech.services.locacao.v1.impl;
 
 import br.unesp.agrotech.dtos.CreateDispositivoDTO;
-import br.unesp.agrotech.dtos.DispositivoDTO;
 import br.unesp.agrotech.dtos.GetDispositivoDTO;
 import br.unesp.agrotech.entities.CategoriaDispositivoEntity;
 import br.unesp.agrotech.entities.DispositivoEntity;
