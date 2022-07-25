@@ -25,6 +25,7 @@ services:
     networks:
       - rabbit_network
     environment:
+      RABBITMQ_CONNECTION_STRING: amqp://fila-soo:Grupo05SOO@rabbit:5672
       SENSOR_QUEUE: estante-1
       INTERVAL_SECONDS: 4
 
@@ -35,6 +36,7 @@ services:
     networks:
       - rabbit_network
     environment:
+      RABBITMQ_CONNECTION_STRING: amqp://fila-soo:Grupo05SOO@rabbit:5672
       SENSOR_QUEUE: estante-1
       INTERVAL_SECONDS: 5
     
